@@ -46,25 +46,113 @@ class Dcal():
 		self.is_open = False
 	#######################################################################
 	# Device Information and Status
-	def version(self):
+	def sdk_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		wb_version = dcal_py.version()
-		ret = self.d.version_pull( wb_version )
+		sdk_version = dcal_py.sdk_version()
+		ret = self.d.get_sdk_version( sdk_version )
 		if ret != 0:
-			raise CommandError("Error when doing version_pull: " + ret)
-		ver_dict = {
-			'sdk': wb_version.sdk,
-			'chipset': wb_version.chipset,
-			'sys': wb_version.sys,
-			'driver': wb_version.driver,
-			'dcas': wb_version.dcas,
-			'dcal': wb_version.dcal,
-			'firmware': wb_version.firmware(),
-			'supplicant': wb_version.supplicant(),
-			'release': wb_version.release()
+			raise CommandError("Error when doing get_sdk_version: " + ret)
+		sdk_dict = {
+			'sdk': sdk_version.sdk,
 		}
-		return ver_dict
+		return sdk_dict
+
+	def chipset_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		chipset_version = dcal_py.chipset_version()
+		ret = self.d.get_chipset_version( chipset_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_chipset_version: " + ret)
+		chipset_dict = {
+			'chipset': chipset_version.chipset,
+		}
+		return chipset_dict
+
+	def system_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		system_version = dcal_py.system_version()
+		ret = self.d.get_system_version( system_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_system_version: " + ret)
+		system_dict = {
+			'sys': system_version.sys,
+		}
+		return system_dict
+
+	def driver_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		driver_version = dcal_py.driver_version()
+		ret = self.d.get_driver_version( driver_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_driver_version: " + ret)
+		driver_dict = {
+			'driver': driver_version.driver,
+		}
+		return driver_dict
+
+	def dcas_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		dcas_version = dcal_py.dcas_version()
+		ret = self.d.get_dcas_version( dcas_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_dcas_version: " + ret)
+		dcas_dict = {
+			'dcas': dcas_version.dcas,
+		}
+		return dcas_dict
+
+	def dcal_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		dcal_version = dcal_py.dcal_version()
+		ret = self.d.get_dcal_version( dcal_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_dcal_version: " + ret)
+		dcal_dict = {
+			'dcal': dcal_version.dcal,
+		}
+		return dcal_dict
+
+	def firmware_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		firmware_version = dcal_py.firmware_version()
+		ret = self.d.get_firmware_version( firmware_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_firmware_version: " + ret)
+		firmware_dict = {
+			'firmware': firmware_version.firmware(),
+		}
+		return firmware_dict
+
+	def supplicant_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		supplicant_version = dcal_py.supplicant_version()
+		ret = self.d.get_supplicant_version( supplicant_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_supplicant_version: " + ret)
+		supplicant_dict = {
+			'supplicant': supplicant_version.supplicant(),
+		}
+		return supplicant_dict
+
+	def release_version(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		release_version = dcal_py.release_version()
+		ret = self.d.get_release_version( release_version )
+		if ret != 0:
+			raise CommandError("Error when doing get_release_version: " + ret)
+		release_dict = {
+			'release': release_version.release(),
+		}
+		return release_dict
 
 	def status_pull(self):
 		if not self.is_open:
