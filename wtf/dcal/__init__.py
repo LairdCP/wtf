@@ -1070,3 +1070,32 @@ class Dcal():
 		ret = self.d.system_restart()
 		if ret != 0:
 			raise CommandError("Error when doing system_restart: ", ret)
+
+	#######################################################################
+	# time controls
+	def time_set(self, tv_sec, tv_usec):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.time_set(tv_sec, tv_usec)
+		if ret != 0:
+			raise CommandError("Error when doing time_set: ", ret)
+
+	def time_get(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		dcal_time = dcal_py.dcal_time()
+		ret = self.d.time_get( dcal_time )
+		if ret != 0:
+			raise CommandError("Error when processing time_get: ", ret)
+		time_dict = {
+			'tv_sec': dcal_time.tv_sec,
+			'tv_usec': dcal_time.tv_usec,
+		}
+		return time_dict
+
+	def ntpdate(self, server_name):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.ntpdate(server_name)
+		if ret != 0:
+			raise CommandError("Error when doing ntpdate: ", ret)

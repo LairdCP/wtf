@@ -1148,7 +1148,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_ttls_inner_method != TTLS_INNER_METHOD,
 				"Failed to set TTLS inner method: " + str(global_ttls_inner_method))
 
-	def test_0050_set_uapsd(self):
+	def test_0051_set_uapsd(self):
 		UAPSD = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1168,7 +1168,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_uapsd != UAPSD,
 				"Failed to set UAPSD: " + str(global_uapsd))
 
-	def test_0050_set_wmm(self):
+	def test_0052_set_wmm(self):
 		WMM = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1187,3 +1187,29 @@ class TestDCAL(unittest.TestCase):
 
 			self.failIf(global_uapsd != WMM,
 				"Failed to set WMM: " + str(global_uapsd))
+
+
+	def test_0053_set_ntpdate(self):
+		GOOD_FQDN = "pool.ntp.org";
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.ntpdate(GOOD_FQDN);
+			time_dict = n.dcal.time_get()
+			pprint.pprint(time_dict)
+			n.dcal.close()
+
+	def test_0054_set_time(self):
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			time_dict_orig = n.dcal.time_get()
+			n.dcal.time_set(time_dict_orig['tv_sec'], time_dict_orig['tv_usec']);
+			time_dict_now = n.dcal.time_get()
+			pprint.pprint(time_dict_now)
+			time_dict_later = n.dcal.time_get()
+			n.dcal.close()
+
+			self.failIf(time_dict_orig['tv_sec'] != time_dict_now['tv_sec'] != time_dict_later['tv_sec'],
+				"Failed to set time, tv_sec does not match: " + str(time_dict_now['tv_sec']))
+
+			self.failIf(time_dict_orig['tv_usec'] >= time_dict_now['tv_usec'] >= time_dict_later['tv_usec'],
+				"Failed to set time, tv_usec out of bounds: " + str(time_dict_now['tv_usec']))
