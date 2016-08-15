@@ -29,8 +29,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0002_sdk_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			sdk_dict = n.dcal.sdk_version()
-			pprint.pprint(sdk_dict) # only see this if doing ./run -s
+			sdk_version = n.dcal.sdk_version()
+			pprint.pprint(sdk_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -38,8 +38,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0003_chipset_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			chipset_dict = n.dcal.chipset_version()
-			pprint.pprint(chipset_dict) # only see this if doing ./run -s
+			chipset_version = n.dcal.chipset_version()
+			pprint.pprint(chipset_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -47,8 +47,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0004_system_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			system_dict = n.dcal.system_version()
-			pprint.pprint(system_dict) # only see this if doing ./run -s
+			system_version = n.dcal.system_version()
+			pprint.pprint(system_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -56,8 +56,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0005_driver_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			driver_dict = n.dcal.driver_version()
-			pprint.pprint(driver_dict) # only see this if doing ./run -s
+			driver_version = n.dcal.driver_version()
+			pprint.pprint(driver_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -65,8 +65,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0006_dcas_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			dcas_dict = n.dcal.dcas_version()
-			pprint.pprint(dcas_dict) # only see this if doing ./run -s
+			dcas_version = n.dcal.dcas_version()
+			pprint.pprint(dcas_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -74,8 +74,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0007_dcal_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			dcal_dict = n.dcal.dcal_version()
-			pprint.pprint(dcal_dict) # only see this if doing ./run -s
+			dcal_version = n.dcal.dcal_version()
+			pprint.pprint(dcal_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -83,8 +83,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0008_firmware_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			firmware_dict = n.dcal.firmware_version()
-			pprint.pprint(firmware_dict) # only see this if doing ./run -s
+			firmware_version = n.dcal.firmware_version()
+			pprint.pprint(firmware_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -92,8 +92,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0009_supplicant_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			supplicant_dict = n.dcal.supplicant_version()
-			pprint.pprint(supplicant_dict) # only see this if doing ./run -s
+			supplicant_version = n.dcal.supplicant_version()
+			pprint.pprint(supplicant_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -101,8 +101,8 @@ class TestDCAL(unittest.TestCase):
 	def test_0010_release_version(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			release_dict = n.dcal.release_version()
-			pprint.pprint(release_dict) # only see this if doing ./run -s
+			release_version = n.dcal.release_version()
+			pprint.pprint(release_version) # only see this if doing ./run -s
 			# So we don't break just because we're running against
 			# different releases, we don't check the return
 			n.dcal.close()
@@ -213,8 +213,8 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
@@ -238,32 +238,32 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
 			profile_SSID_dict = n.dcal.wifi_profile_get_SSID()
-			encryption_std_dict = n.dcal.wifi_profile_get_encrypt_std()
+			profile_encryption_std = n.dcal.wifi_profile_get_encrypt_std()
 			profile_wep_key = n.dcal.wifi_profile_wep_key_is_set(WEPINDEX)
 			profile_wep_txkey = n.dcal.wifi_profile_get_wep_txkey()
 			pprint.pprint(profile_profilename)
 			pprint.pprint(profile_SSID_dict)
-			pprint.pprint(encryption_std_dict)
+			pprint.pprint(profile_encryption_std)
 			pprint.pprint(profile_wep_key)
 			pprint.pprint(profile_wep_txkey)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
 
-			self.failIf(encryption_std_dict['encryption_std'] != ES_WEP,
-				"Failed to set encryption_std: " + str(encryption_std_dict['encryption_std']))
+			self.failIf(profile_encryption_std != ES_WEP,
+				"Failed to set encryption_std: " + str(profile_encryption_std))
 
-			self.failIf(profile_wep_key['wep_key'] != True,
-				"Failed to set WEP key: " + str(profile_wep_key['wep_key']))
+			self.failIf(profile_wep_key != True,
+				"Failed to set WEP key: " + str(profile_wep_key))
 
-			self.failIf(profile_wep_txkey['txkey'] != WEPINDEX,
-				"Failed to set WEP TX key: " + str(profile_wep_txkey['txkey']))
+			self.failIf(profile_wep_txkey != WEPINDEX,
+				"Failed to set WEP TX key: " + str(profile_wep_txkey))
 
 	def test_0021_create_wpa2_aes_psk_profile(self):
 		newProfileName = "wtf_wpa2_aes_psk"
@@ -284,32 +284,32 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
 			profile_SSID_dict = n.dcal.wifi_profile_get_SSID()
-			encryption_std_dict = n.dcal.wifi_profile_get_encrypt_std()
-			encryption_dict = n.dcal.wifi_profile_get_encryption()
-			psk_dict = n.dcal.wifi_profile_psk_is_set()
+			profile_encryption_std = n.dcal.wifi_profile_get_encrypt_std()
+			profile_encryption = n.dcal.wifi_profile_get_encryption()
+			profile_psk = n.dcal.wifi_profile_psk_is_set()
 			pprint.pprint(profile_profilename)
 			pprint.pprint(profile_SSID_dict)
-			pprint.pprint(encryption_std_dict)
-			pprint.pprint(encryption_dict)
-			pprint.pprint(psk_dict)
+			pprint.pprint(profile_encryption_std)
+			pprint.pprint(profile_encryption)
+			pprint.pprint(profile_psk)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
 
-			self.failIf(encryption_std_dict['encryption_std'] != ES_WPA2,
-				"Failed to set encryption_std: " + str(encryption_std_dict['encryption_std']))
+			self.failIf(profile_encryption_std != ES_WPA2,
+				"Failed to set encryption_std: " + str(profile_encryption_std))
 
-			self.failIf(encryption_dict['encryption'] != ENC_AES,
-				"Failed to set encryption: " + str(encryption_dict['encryption']))
+			self.failIf(profile_encryption != ENC_AES,
+				"Failed to set encryption: " + str(profile_encryption))
 
-			self.failIf(psk_dict['psk'] != True,
-				"Failed to set psk: " + str(psk_dict['psk']))
+			self.failIf(profile_psk != True,
+				"Failed to set psk: " + str(profile_psk))
 
 	def test_0022_create_wpa2_aes_eapfast_profile(self):
 		newProfileName = "wtf_wpa2_eapfast_mschap"
@@ -338,52 +338,52 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
 			profile_SSID_dict = n.dcal.wifi_profile_get_SSID()
-			encryption_std_dict = n.dcal.wifi_profile_get_encrypt_std()
-			encryption_dict = n.dcal.wifi_profile_get_encryption()
-			eap_dict = n.dcal.wifi_profile_get_eap()
-			user_dict = n.dcal.wifi_profile_user_is_set()
-			password_dict = n.dcal.wifi_profile_password_is_set()
-			pacfilename_dict = n.dcal.wifi_profile_pacfile_is_set()
-			pacpassword_dict = n.dcal.wifi_profile_pacpassword_is_set()
+			profile_encryption_std = n.dcal.wifi_profile_get_encrypt_std()
+			profile_encryption = n.dcal.wifi_profile_get_encryption()
+			profile_eap = n.dcal.wifi_profile_get_eap()
+			profile_user = n.dcal.wifi_profile_user_is_set()
+			profile_password = n.dcal.wifi_profile_password_is_set()
+			profile_pacfilename = n.dcal.wifi_profile_pacfile_is_set()
+			profile_pacprofile_password = n.dcal.wifi_profile_pacpassword_is_set()
 			pprint.pprint(profile_profilename)
 			pprint.pprint(profile_SSID_dict)
-			pprint.pprint(encryption_std_dict)
-			pprint.pprint(encryption_dict)
-			pprint.pprint(eap_dict)
-			pprint.pprint(user_dict)
-			pprint.pprint(password_dict)
-			pprint.pprint(pacfilename_dict)
-			pprint.pprint(pacpassword_dict)
+			pprint.pprint(profile_encryption_std)
+			pprint.pprint(profile_encryption)
+			pprint.pprint(profile_eap)
+			pprint.pprint(profile_user)
+			pprint.pprint(profile_password)
+			pprint.pprint(profile_pacfilename)
+			pprint.pprint(profile_pacprofile_password)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
 
-			self.failIf(encryption_std_dict['encryption_std'] != ES_WPA2,
-				"Failed to set encryption_std: " + str(encryption_std_dict['encryption_std']))
+			self.failIf(profile_encryption_std != ES_WPA2,
+				"Failed to set encryption_std: " + str(profile_encryption_std))
 
-			self.failIf(encryption_dict['encryption'] != ENC_AES,
-				"Failed to set encryption: " + str(encryption_dict['encryption']))
+			self.failIf(profile_encryption != ENC_AES,
+				"Failed to set encryption: " + str(profile_encryption))
 
-			self.failIf(eap_dict['eap'] != EAP_FAST,
-				"Failed to set eap: " + str(eap_dict['eap']))
+			self.failIf(profile_eap != EAP_FAST,
+				"Failed to set eap: " + str(profile_eap))
 
-			self.failIf(user_dict['user'] != True,
-				"Failed to set user: " + str(user_dict['user']))
+			self.failIf(profile_user != True,
+				"Failed to set user: " + str(profile_user))
 
-			self.failIf(password_dict['password'] != True,
-				"Failed to set password: " + str(password_dict['password']))
+			self.failIf(profile_password != True,
+				"Failed to set password: " + str(profile_password))
 
-			self.failIf(pacfilename_dict['pacfile'] != True,
-				"Failed to set PAC filename: " + str(pacfilename_dict['pacfile']))
+			self.failIf(profile_pacfilename != True,
+				"Failed to set PAC filename: " + str(profile_pacfilename))
 
-			self.failIf(pacpassword_dict['pacpassword'] != True,
-				"Failed to set PAC password: " + str(pacpassword_dict['pacpassword']))
+			self.failIf(profile_pacprofile_password != True,
+				"Failed to set PAC password: " + str(profile_pacprofile_password))
 
 	def test_0023_create_wpa2_aes_mschap_profile(self):
 		newProfileName = "wtf_wpa2_aes_mschap"
@@ -410,47 +410,47 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
 			profile_SSID_dict = n.dcal.wifi_profile_get_SSID()
-			encryption_std_dict = n.dcal.wifi_profile_get_encrypt_std()
-			encryption_dict = n.dcal.wifi_profile_get_encryption()
-			eap_dict = n.dcal.wifi_profile_get_eap()
-			user_dict = n.dcal.wifi_profile_user_is_set()
-			password_dict = n.dcal.wifi_profile_password_is_set()
-			cacert_dict = n.dcal.wifi_profile_cacert_is_set()
+			profile_encryption_std = n.dcal.wifi_profile_get_encrypt_std()
+			profile_encryption = n.dcal.wifi_profile_get_encryption()
+			profile_eap = n.dcal.wifi_profile_get_eap()
+			profile_user = n.dcal.wifi_profile_user_is_set()
+			profile_password = n.dcal.wifi_profile_password_is_set()
+			profile_cacert = n.dcal.wifi_profile_cacert_is_set()
 			pprint.pprint(profile_profilename)
 			pprint.pprint(profile_SSID_dict)
-			pprint.pprint(encryption_std_dict)
-			pprint.pprint(encryption_dict)
-			pprint.pprint(eap_dict)
-			pprint.pprint(user_dict)
-			pprint.pprint(password_dict)
-			pprint.pprint(cacert_dict)
+			pprint.pprint(profile_encryption_std)
+			pprint.pprint(profile_encryption)
+			pprint.pprint(profile_eap)
+			pprint.pprint(profile_user)
+			pprint.pprint(profile_password)
+			pprint.pprint(profile_cacert)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
 
-			self.failIf(encryption_std_dict['encryption_std'] != ES_WPA2,
-				"Failed to set encryption_std: " + str(encryption_std_dict['encryption_std']))
+			self.failIf(profile_encryption_std != ES_WPA2,
+				"Failed to set encryption_std: " + str(profile_encryption_std))
 
-			self.failIf(encryption_dict['encryption'] != ENC_AES,
-				"Failed to set encryption: " + str(encryption_dict['encryption']))
+			self.failIf(profile_encryption != ENC_AES,
+				"Failed to set encryption: " + str(profile_encryption))
 
-			self.failIf(eap_dict['eap'] != EAP_PEAPMSCHAP,
-				"Failed to set eap: " + str(eap_dict['eap']))
+			self.failIf(profile_eap != EAP_PEAPMSCHAP,
+				"Failed to set eap: " + str(profile_eap))
 
-			self.failIf(user_dict['user'] != True,
-				"Failed to set user: " + str(user_dict['user']))
+			self.failIf(profile_user != True,
+				"Failed to set user: " + str(profile_user))
 
-			self.failIf(password_dict['password'] != True,
-				"Failed to set password: " + str(password_dict['password']))
+			self.failIf(profile_password != True,
+				"Failed to set password: " + str(profile_password))
 
-			self.failIf(cacert_dict['cacert'] != True,
-				"Failed to set usercert password: " + str(cacert_dict['cacert']))
+			self.failIf(profile_cacert != True,
+				"Failed to set usercert password: " + str(profile_cacert))
 
 	def test_0024_create_wpa2_aes_eap_tls_profile(self):
 		newProfileName = "wtf_wpa2_aes_eap_tls"
@@ -480,52 +480,52 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
 			profile_SSID_dict = n.dcal.wifi_profile_get_SSID()
-			encryption_std_dict = n.dcal.wifi_profile_get_encrypt_std()
-			encryption_dict = n.dcal.wifi_profile_get_encryption()
-			eap_dict = n.dcal.wifi_profile_get_eap()
-			user_dict = n.dcal.wifi_profile_user_is_set()
-			usercert_dict = n.dcal.wifi_profile_usercert_is_set()
-			usercert_password_dict = n.dcal.wifi_profile_usercert_password_is_set()
-			cacert_dict = n.dcal.wifi_profile_cacert_is_set()
+			profile_encryption_std = n.dcal.wifi_profile_get_encrypt_std()
+			profile_encryption = n.dcal.wifi_profile_get_encryption()
+			profile_eap = n.dcal.wifi_profile_get_eap()
+			profile_user = n.dcal.wifi_profile_user_is_set()
+			profile_usercert = n.dcal.wifi_profile_usercert_is_set()
+			profile_usercert_profile_password = n.dcal.wifi_profile_usercert_password_is_set()
+			profile_cacert = n.dcal.wifi_profile_cacert_is_set()
 			pprint.pprint(profile_profilename)
 			pprint.pprint(profile_SSID_dict)
-			pprint.pprint(encryption_std_dict)
-			pprint.pprint(encryption_dict)
-			pprint.pprint(eap_dict)
-			pprint.pprint(user_dict)
-			pprint.pprint(usercert_dict)
-			pprint.pprint(usercert_password_dict)
-			pprint.pprint(cacert_dict)
+			pprint.pprint(profile_encryption_std)
+			pprint.pprint(profile_encryption)
+			pprint.pprint(profile_eap)
+			pprint.pprint(profile_user)
+			pprint.pprint(profile_usercert)
+			pprint.pprint(profile_usercert_profile_password)
+			pprint.pprint(profile_cacert)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
 
-			self.failIf(encryption_std_dict['encryption_std'] != ES_WPA2,
-				"Failed to set encryption_std: " + str(encryption_std_dict['encryption_std']))
+			self.failIf(profile_encryption_std != ES_WPA2,
+				"Failed to set encryption_std: " + str(profile_encryption_std))
 
-			self.failIf(encryption_dict['encryption'] != ENC_AES,
-				"Failed to set encryption: " + str(encryption_dict['encryption']))
+			self.failIf(profile_encryption != ENC_AES,
+				"Failed to set encryption: " + str(profile_encryption))
 
-			self.failIf(eap_dict['eap'] != EAP_EAPTLS,
-				"Failed to set eap: " + str(eap_dict['eap']))
+			self.failIf(profile_eap != EAP_EAPTLS,
+				"Failed to set eap: " + str(profile_eap))
 
-			self.failIf(user_dict['user'] != True,
-				"Failed to set user: " + str(user_dict['user']))
+			self.failIf(profile_user != True,
+				"Failed to set user: " + str(profile_user))
 
-			self.failIf(usercert_dict['usercert'] != True,
-				"Failed to set usercert: " + str(usercert_dict['usercert']))
+			self.failIf(profile_usercert != True,
+				"Failed to set usercert: " + str(profile_usercert))
 
-			self.failIf(usercert_password_dict['usercert_password'] != True,
-				"Failed to set usercert password: " + str(usercert_password_dict['usercert_password']))
+			self.failIf(profile_usercert_profile_password != True,
+				"Failed to set usercert password: " + str(profile_usercert_profile_password))
 
-			self.failIf(cacert_dict['cacert'] != True,
-				"Failed to set usercert password: " + str(cacert_dict['cacert']))
+			self.failIf(profile_cacert != True,
+				"Failed to set usercert password: " + str(profile_cacert))
 
 	def test_0025_set_clientname(self):
 		newProfileName = "wtf_clientname"
@@ -539,18 +539,18 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			clientname_dict = n.dcal.wifi_profile_get_clientname()
+			profile_clientname = n.dcal.wifi_profile_get_clientname()
 			pprint.pprint(profile_profilename)
-			pprint.pprint(clientname_dict)
+			pprint.pprint(profile_clientname)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
-			self.failIf(clientname_dict['clientname_buffer'] != CLIENTNAME,
-				"Failed to set clientname: " + str(clientname_dict['clientname_buffer']))
+			self.failIf(profile_clientname != CLIENTNAME,
+				"Failed to set clientname: " + str(profile_clientname))
 
 	def test_0026_set_radiomode(self):
 		newProfileName = "wtf_radiomode"
@@ -564,18 +564,18 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			radiomode_dict = n.dcal.wifi_profile_get_radiomode()
+			profile_radiomode = n.dcal.wifi_profile_get_radiomode()
 			pprint.pprint(profile_profilename)
-			pprint.pprint(radiomode_dict)
+			pprint.pprint(profile_radiomode)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
-			self.failIf(radiomode_dict['mode'] != RADIOMODE_BG,
-				"Failed to set radiomode: " + str(radiomode_dict['mode']))
+			self.failIf(profile_radiomode != RADIOMODE_BG,
+				"Failed to set radiomode: " + str(profile_radiomode))
 
 	def test_0027_set_powersave(self):
 		newProfileName = "wtf_powersave"
@@ -589,18 +589,18 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			powersave_dict = n.dcal.wifi_profile_get_powersave()
+			profile_powersave = n.dcal.wifi_profile_get_powersave()
 			pprint.pprint(profile_profilename)
-			pprint.pprint(powersave_dict)
+			pprint.pprint(profile_powersave)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
-			self.failIf(powersave_dict['powersave'] != POWERSAVE_OFF,
-				"Failed to set powersave: " + str(powersave_dict['powersave']))
+			self.failIf(profile_powersave != POWERSAVE_OFF,
+				"Failed to set powersave: " + str(profile_powersave))
 
 	def test_0028_set_psp_delay(self):
 		newProfileName = "wtf_psp_delay"
@@ -614,18 +614,18 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			pspdelay_dict = n.dcal.wifi_profile_get_psp_delay()
+			profile_pspdelay = n.dcal.wifi_profile_get_psp_delay()
 			pprint.pprint(profile_profilename)
-			pprint.pprint(pspdelay_dict)
+			pprint.pprint(profile_pspdelay)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
-			self.failIf(pspdelay_dict['pspdelay'] != PSPDELAY,
-				"Failed to set pspdelay: " + str(pspdelay_dict['pspdelay']))
+			self.failIf(profile_pspdelay != PSPDELAY,
+				"Failed to set pspdelay: " + str(profile_pspdelay))
 
 	def test_0029_set_txpower(self):
 		newProfileName = "wtf_txpower"
@@ -639,18 +639,18 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			txpower_dict = n.dcal.wifi_profile_get_txpower()
+			profile_txpower = n.dcal.wifi_profile_get_txpower()
 			pprint.pprint(profile_profilename)
-			pprint.pprint(txpower_dict)
+			pprint.pprint(profile_txpower)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
-			self.failIf(txpower_dict['txpower'] != TXPOWER,
-				"Failed to set txpower: " + str(txpower_dict['txpower']))
+			self.failIf(profile_txpower != TXPOWER,
+				"Failed to set txpower: " + str(profile_txpower))
 
 	def test_0030_set_bitrate(self):
 		newProfileName = "wtf_bitrate"
@@ -664,18 +664,18 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			bitrate_dict = n.dcal.wifi_profile_get_bitrate()
+			profile_bitrate = n.dcal.wifi_profile_get_bitrate()
 			pprint.pprint(profile_profilename)
-			pprint.pprint(bitrate_dict)
+			pprint.pprint(profile_bitrate)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(profile_profilename['profilename_buffer'] != newProfileName,
-				"Failed to set profile name: " + str(profile_profilename['profilename_buffer']))
+			self.failIf(profile_profilename != newProfileName,
+				"Failed to set profile name: " + str(profile_profilename))
 
-			self.failIf(bitrate_dict['bitrate'] != BITRATE,
-				"Failed to set bitrate: " + str(bitrate_dict['bitrate']))
+			self.failIf(profile_bitrate != BITRATE,
+				"Failed to set bitrate: " + str(profile_bitrate))
 
 	def test_0031_set_autoprofile(self):
 		newProfileName = "wtf_autoprofile"
@@ -690,24 +690,24 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			autoprofile_on_dict = n.dcal.wifi_profile_get_autoprofile()
-			pprint.pprint(autoprofile_on_dict)
+			profile_autoprofile_on = n.dcal.wifi_profile_get_autoprofile()
+			pprint.pprint(profile_autoprofile_on)
 			n.dcal.wifi_profile_set_autoprofile(OFF);
 			n.dcal.wifi_profile_push()
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_pull(newProfileName)
 			profile_profilename = n.dcal.wifi_profile_get_profilename()
-			autoprofile_off_dict = n.dcal.wifi_profile_get_autoprofile()
-			pprint.pprint(autoprofile_off_dict)
+			profile_autoprofile_off = n.dcal.wifi_profile_get_autoprofile()
+			pprint.pprint(profile_autoprofile_off)
 			n.dcal.wifi_profile_close_handle()
 			n.dcal.wifi_profile_delete_from_device(newProfileName)
 			n.dcal.close()
 
-			self.failIf(autoprofile_on_dict['autoprofile'] != ON,
-				"Failed to set autoprofile: " + str(autoprofile_on_dict['autoprofile']))
+			self.failIf(profile_autoprofile_on != ON,
+				"Failed to set autoprofile: " + str(profile_autoprofile_on))
 
-			self.failIf(autoprofile_off_dict['autoprofile'] != OFF,
-				"Failed to set autoprofile: " + str(autoprofile_off_dict['autoprofile']))
+			self.failIf(profile_autoprofile_off != OFF,
+				"Failed to set autoprofile: " + str(profile_autoprofile_off))
 
 	def test_0032_wifi_restart(self):
 		for n in wtfconfig.nodes:

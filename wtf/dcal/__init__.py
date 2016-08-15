@@ -49,110 +49,83 @@ class Dcal():
 	def sdk_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		sdk_version = dcal_py.sdk_version()
+		sdk_version = dcal_py.generic_uint()
 		ret = self.d.get_sdk_version( sdk_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_sdk_version: ", ret)
-		sdk_dict = {
-			'sdk': sdk_version.sdk,
-		}
-		return sdk_dict
+		return sdk_version.gen_uint
 
 	def chipset_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		chipset_version = dcal_py.chipset_version()
+		chipset_version = dcal_py.generic_int()
 		ret = self.d.get_chipset_version( chipset_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_chipset_version: ", ret)
-		chipset_dict = {
-			'chipset': chipset_version.chipset,
-		}
-		return chipset_dict
+		return chipset_version.gen_int
 
 	def system_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		system_version = dcal_py.system_version()
+		system_version = dcal_py.generic_int()
 		ret = self.d.get_system_version( system_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_system_version: ", ret)
-		system_dict = {
-			'sys': system_version.sys,
-		}
-		return system_dict
+		return system_version.gen_int
 
 	def driver_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		driver_version = dcal_py.driver_version()
+		driver_version = dcal_py.generic_uint()
 		ret = self.d.get_driver_version( driver_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_driver_version: ", ret)
-		driver_dict = {
-			'driver': driver_version.driver,
-		}
-		return driver_dict
+		return driver_version.gen_uint
 
 	def dcas_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		dcas_version = dcal_py.dcas_version()
+		dcas_version = dcal_py.generic_uint()
 		ret = self.d.get_dcas_version( dcas_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_dcas_version: ", ret)
-		dcas_dict = {
-			'dcas': dcas_version.dcas,
-		}
-		return dcas_dict
+		return dcas_version.gen_uint
 
 	def dcal_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		dcal_version = dcal_py.dcal_version()
+		dcal_version = dcal_py.generic_uint()
 		ret = self.d.get_dcal_version( dcal_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_dcal_version: ", ret)
-		dcal_dict = {
-			'dcal': dcal_version.dcal,
-		}
-		return dcal_dict
+		return dcal_version.gen_uint
 
 	def firmware_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		firmware_version = dcal_py.firmware_version()
+		firmware_version = dcal_py.generic_string()
 		ret = self.d.get_firmware_version( firmware_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_firmware_version: ", ret)
-		firmware_dict = {
-			'firmware': firmware_version.firmware(),
-		}
-		return firmware_dict
+		return firmware_version.gen_string()
 
 	def supplicant_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		supplicant_version = dcal_py.supplicant_version()
+		supplicant_version = dcal_py.generic_string()
 		ret = self.d.get_supplicant_version( supplicant_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_supplicant_version: ", ret)
-		supplicant_dict = {
-			'supplicant': supplicant_version.supplicant(),
-		}
-		return supplicant_dict
+		return supplicant_version.gen_string()
 
 	def release_version(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		release_version = dcal_py.release_version()
+		release_version = dcal_py.generic_string()
 		ret = self.d.get_release_version( release_version )
 		if ret != 0:
 			raise CommandError("Error when doing get_release_version: ", ret)
-		release_dict = {
-			'release': release_version.release(),
-		}
-		return release_dict
+		return release_version.gen_string()
 
 	def status_pull(self):
 		if not self.is_open:
@@ -303,14 +276,11 @@ class Dcal():
 	def wifi_profile_get_profilename(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_profilename = dcal_py.profile_profilename()
+		profile_profilename = dcal_py.generic_string()
 		ret = self.d.wifi_profile_get_profilename( profile_profilename )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_profilename: ", ret)
-		profilename_dict = {
-			'profilename_buffer': profile_profilename.profilename(),
-		}
-		return profilename_dict
+		return profile_profilename.gen_string()
 
 	def wifi_profile_set_SSID(self, name):
 		if not self.is_open:
@@ -332,21 +302,6 @@ class Dcal():
 		}
 		return profile_SSID_dict
 
-	def status_get_connection_extended(self):
-		if not self.is_open:
-			raise SessionError("Error session is not open")
-		wb_connection_extended = dcal_py.connection_extended()
-		ret = self.d.device_status_get_connection_extended( wb_connection_extended )
-		if ret != 0:
-			raise CommandError("Error when processing connection extended: ", ret)
-		con_ext_dict = {
-			'bitrate': wb_connection_extended.bitrate,
-			'txpower': wb_connection_extended.txpower,
-			'dtim': wb_connection_extended.dtim,
-			'beaconperiod': wb_connection_extended.beaconperiod
-		}
-		return con_ext_dict
-
 	def wifi_profile_set_encrypt_std(self, encyption_std):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
@@ -357,14 +312,11 @@ class Dcal():
 	def wifi_profile_get_encrypt_std(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_encryption_std = dcal_py.profile_encryption_std()
+		profile_encryption_std = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_encrypt_std( profile_encryption_std )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_encrypt_std: ", ret)
-		encryption_std_dict = {
-			'encryption_std': profile_encryption_std.encryption_std,
-		}
-		return encryption_std_dict
+		return profile_encryption_std.gen_int
 
 	def wifi_profile_set_encryption(self, encyption):
 		if not self.is_open:
@@ -376,14 +328,11 @@ class Dcal():
 	def wifi_profile_get_encryption(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_encryption = dcal_py.profile_encryption()
+		profile_encryption = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_encryption( profile_encryption )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_encryption: ", ret)
-		encryption_dict = {
-			'encryption': profile_encryption.encryption,
-		}
-		return encryption_dict
+		return profile_encryption.gen_int
 
 	def wifi_profile_set_auth(self, auth_type):
 		if not self.is_open:
@@ -395,14 +344,11 @@ class Dcal():
 	def wifi_profile_get_auth(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_auth = dcal_py.profile_auth()
+		profile_auth = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_auth( profile_auth )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_auth: ", ret)
-		auth_dict = {
-			'auth': profile_auth.auth,
-		}
-		return auth_dict
+		return profile_auth.gen_int
 
 	def wifi_profile_set_eap(self, eap):
 		if not self.is_open:
@@ -414,14 +360,11 @@ class Dcal():
 	def wifi_profile_get_eap(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_eap = dcal_py.profile_eap()
+		profile_eap = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_eap( profile_eap )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_eap: ", ret)
-		eap_dict = {
-			'eap': profile_eap.eap,
-		}
-		return eap_dict
+		return profile_eap.gen_int
 
 	def wifi_profile_set_psk(self, psk):
 		if not self.is_open:
@@ -433,14 +376,11 @@ class Dcal():
 	def wifi_profile_psk_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_psk = dcal_py.profile_psk()
+		profile_psk = dcal_py.generic_int()
 		ret = self.d.wifi_profile_psk_is_set( profile_psk )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_psk_is_set: ", ret)
-		psk_dict = {
-			'psk': profile_psk.psk,
-		}
-		return psk_dict
+		return profile_psk.gen_int
 
 	def wifi_profile_set_user(self, user):
 		if not self.is_open:
@@ -452,14 +392,11 @@ class Dcal():
 	def wifi_profile_user_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_user = dcal_py.profile_user()
+		profile_user = dcal_py.generic_int()
 		ret = self.d.wifi_profile_user_is_set( profile_user )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_user_is_set: ", ret)
-		user_dict = {
-			'user': profile_user.user,
-		}
-		return user_dict
+		return profile_user.gen_int
 
 	def wifi_profile_set_password(self, password):
 		if not self.is_open:
@@ -471,14 +408,11 @@ class Dcal():
 	def wifi_profile_password_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_password = dcal_py.profile_password()
+		profile_password = dcal_py.generic_int()
 		ret = self.d.wifi_profile_password_is_set( profile_password )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_password_is_set: ", ret)
-		password_dict = {
-			'password': profile_password.password,
-		}
-		return password_dict
+		return profile_password.gen_int
 
 	def wifi_profile_set_cacert(self, cacert):
 		if not self.is_open:
@@ -490,14 +424,11 @@ class Dcal():
 	def wifi_profile_cacert_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_cacert = dcal_py.profile_cacert()
+		profile_cacert = dcal_py.generic_int()
 		ret = self.d.wifi_profile_cacert_is_set( profile_cacert )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_cacert_is_set: ", ret)
-		cacert_dict = {
-			'cacert': profile_cacert.cacert,
-		}
-		return cacert_dict
+		return profile_cacert.gen_int
 
 	def wifi_profile_set_pacfile(self, pacfilename):
 		if not self.is_open:
@@ -509,14 +440,11 @@ class Dcal():
 	def wifi_profile_pacfile_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_pacfile = dcal_py.profile_pacfile()
+		profile_pacfile = dcal_py.generic_int()
 		ret = self.d.wifi_profile_pacfile_is_set( profile_pacfile )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_pacfile_is_set: ", ret)
-		pacfilename_dict = {
-			'pacfile': profile_pacfile.pacfile,
-		}
-		return pacfilename_dict
+		return profile_pacfile.gen_int
 
 	def wifi_profile_set_pacpassword(self, pacpassword):
 		if not self.is_open:
@@ -528,14 +456,11 @@ class Dcal():
 	def wifi_profile_pacpassword_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_pacpassword = dcal_py.profile_pacpassword()
+		profile_pacpassword = dcal_py.generic_int()
 		ret = self.d.wifi_profile_pacpassword_is_set( profile_pacpassword )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_pacpassword_is_set: ", ret)
-		pacpassword_dict = {
-			'pacpassword': profile_pacpassword.pacpassword,
-		}
-		return pacpassword_dict
+		return profile_pacpassword.gen_int
 
 	def wifi_profile_set_usercert(self, usercert):
 		if not self.is_open:
@@ -547,14 +472,11 @@ class Dcal():
 	def wifi_profile_usercert_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_usercert = dcal_py.profile_usercert()
+		profile_usercert = dcal_py.generic_int()
 		ret = self.d.wifi_profile_usercert_is_set( profile_usercert )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_usercert_is_set: ", ret)
-		usercert_dict = {
-			'usercert': profile_usercert.usercert,
-		}
-		return usercert_dict
+		return profile_usercert.gen_int
 
 	def wifi_profile_set_usercert_password(self, usercert_password):
 		if not self.is_open:
@@ -566,14 +488,11 @@ class Dcal():
 	def wifi_profile_usercert_password_is_set(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_usercert_password = dcal_py.profile_usercert_password()
+		profile_usercert_password = dcal_py.generic_int()
 		ret = self.d.wifi_profile_usercert_password_is_set( profile_usercert_password )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_usercert_password_is_set: ", ret)
-		usercert_password_dict = {
-			'usercert_password': profile_usercert_password.usercert_password,
-		}
-		return usercert_password_dict
+		return profile_usercert_password.gen_int
 
 	def wifi_profile_set_wep_key(self, wepkey, index):
 		if not self.is_open:
@@ -585,14 +504,11 @@ class Dcal():
 	def wifi_profile_wep_key_is_set(self, index):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_wep_key = dcal_py.profile_wep_key()
+		profile_wep_key = dcal_py.generic_int()
 		ret = self.d.wifi_profile_wep_key_is_set( profile_wep_key, index )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_wep_key_is_set: ", ret)
-		wep_key_dict = {
-			'wep_key': profile_wep_key.wep_key,
-		}
-		return wep_key_dict
+		return profile_wep_key.gen_int
 
 	def wifi_profile_set_wep_txkey(self, txkey):
 		if not self.is_open:
@@ -604,14 +520,11 @@ class Dcal():
 	def wifi_profile_get_wep_txkey(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_wep_txkey = dcal_py.profile_wep_txkey()
+		profile_wep_txkey = dcal_py.generic_uint()
 		ret = self.d.wifi_profile_get_wep_txkey( profile_wep_txkey )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_wep_txkey: ", ret)
-		clientname_dict = {
-			'txkey': profile_wep_txkey.txkey,
-		}
-		return clientname_dict
+		return profile_wep_txkey.gen_uint
 
 	def wifi_profile_set_clientname(self, clientname):
 		if not self.is_open:
@@ -623,14 +536,11 @@ class Dcal():
 	def wifi_profile_get_clientname(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_clientname = dcal_py.profile_clientname()
+		profile_clientname = dcal_py.generic_string()
 		ret = self.d.wifi_profile_get_clientname( profile_clientname )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_clientname: ", ret)
-		clientname_dict = {
-			'clientname_buffer': profile_clientname.clientname_buffer(),
-		}
-		return clientname_dict
+		return profile_clientname.gen_string()
 
 	def wifi_profile_set_radiomode(self, radio_mode):
 		if not self.is_open:
@@ -642,14 +552,11 @@ class Dcal():
 	def wifi_profile_get_radiomode(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_radiomode = dcal_py.profile_radiomode()
+		profile_radiomode = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_radiomode( profile_radiomode )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_radiomode: ", ret)
-		radiomode_dict = {
-			'mode': profile_radiomode.mode,
-		}
-		return radiomode_dict
+		return profile_radiomode.gen_int
 
 	def wifi_profile_set_powersave(self, power_save):
 		if not self.is_open:
@@ -661,14 +568,11 @@ class Dcal():
 	def wifi_profile_get_powersave(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_powersave = dcal_py.profile_powersave()
+		profile_powersave = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_powersave( profile_powersave )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_powersave: ", ret)
-		powersave_dict = {
-			'powersave': profile_powersave.powersave,
-		}
-		return powersave_dict
+		return profile_powersave.gen_int
 
 	def wifi_profile_set_psp_delay(self, pspdelay):
 		if not self.is_open:
@@ -680,14 +584,11 @@ class Dcal():
 	def wifi_profile_get_psp_delay(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_pspdelay = dcal_py.profile_pspdelay()
+		profile_pspdelay = dcal_py.generic_uint()
 		ret = self.d.wifi_profile_get_psp_delay( profile_pspdelay )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_psp_delay: ", ret)
-		pspdelay_dict = {
-			'pspdelay': profile_pspdelay.pspdelay,
-		}
-		return pspdelay_dict
+		return profile_pspdelay.gen_uint
 
 	def wifi_profile_set_txpower(self, txpower):
 		if not self.is_open:
@@ -699,14 +600,11 @@ class Dcal():
 	def wifi_profile_get_txpower(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_txpower = dcal_py.profile_txpower()
+		profile_txpower = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_txpower( profile_txpower )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_txpower: ", ret)
-		txpower_dict = {
-			'txpower': profile_txpower.txpower,
-		}
-		return txpower_dict
+		return profile_txpower.gen_int
 
 	def wifi_profile_set_bitrate(self, bit_rate):
 		if not self.is_open:
@@ -718,14 +616,11 @@ class Dcal():
 	def wifi_profile_get_bitrate(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_bitrate = dcal_py.profile_bitrate()
+		profile_bitrate = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_bitrate( profile_bitrate )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_bitrate: ", ret)
-		bitrate_dict = {
-			'bitrate': profile_bitrate.bitrate,
-		}
-		return bitrate_dict
+		return profile_bitrate.gen_int
 
 	def wifi_profile_set_autoprofile(self, autoprofile):
 		if not self.is_open:
@@ -737,14 +632,11 @@ class Dcal():
 	def wifi_profile_get_autoprofile(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		profile_autoprofile = dcal_py.profile_autoprofile()
+		profile_autoprofile = dcal_py.generic_int()
 		ret = self.d.wifi_profile_get_autoprofile( profile_autoprofile )
 		if ret != 0:
 			raise CommandError("Error when processing wifi_profile_get_autoprofile: ", ret)
-		autoprofile_dict = {
-			'autoprofile': profile_autoprofile.autoprofile,
-		}
-		return autoprofile_dict
+		return profile_autoprofile.gen_int
 
 	def wifi_profile_printf(self):
 		if not self.is_open:
