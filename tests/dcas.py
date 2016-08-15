@@ -736,3 +736,454 @@ class TestDCAL(unittest.TestCase):
 
 			self.failIf((int(connection_dict['cardstate']) != 1 | int(connection_dict['cardstate']) != 2 | int(connection_dict['cardstate']) != 3),
 				"Failed to enable WiFi: " + str(connection_dict['cardstate']))
+
+	def test_0034_set_auth_server(self):
+		TYPE2 = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_server_auth_orig = n.dcal.wifi_global_get_auth_server()
+			n.dcal.wifi_global_set_auth_server(TYPE2)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_server_auth = n.dcal.wifi_global_get_auth_server()
+			pprint.pprint(global_server_auth)
+			n.dcal.wifi_global_set_auth_server(global_server_auth_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_server_auth != TYPE2,
+				"Failed to set server auth: " + str(global_server_auth))
+
+	def test_0035_set_achannel_mask(self):
+		AMASK = 0;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_achannel_mask_orig = n.dcal.wifi_global_get_achannel_mask()
+			n.dcal.wifi_global_set_achannel_mask(AMASK)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_achannel_mask = n.dcal.wifi_global_get_achannel_mask()
+			pprint.pprint(global_achannel_mask)
+			n.dcal.wifi_global_set_achannel_mask(global_achannel_mask_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_achannel_mask != AMASK,
+				"Failed to set A channel mask: " + str(global_achannel_mask))
+
+	def test_0036_set_bchannel_mask(self):
+		BMASK = 0;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_bchannel_mask_orig = n.dcal.wifi_global_get_bchannel_mask()
+			n.dcal.wifi_global_set_bchannel_mask(BMASK)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_bchannel_mask = n.dcal.wifi_global_get_bchannel_mask()
+			pprint.pprint(global_bchannel_mask)
+			n.dcal.wifi_global_set_bchannel_mask(global_bchannel_mask_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_bchannel_mask != BMASK,
+				"Failed to set B channel mask: " + str(global_bchannel_mask))
+
+	def test_0037_set_beacon_miss(self):
+		BEACON_MISS = 2000;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_beacon_miss_orig = n.dcal.wifi_global_get_beacon_miss()
+			n.dcal.wifi_global_set_beacon_miss(BEACON_MISS)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_beacon_miss = n.dcal.wifi_global_get_beacon_miss()
+			pprint.pprint(global_beacon_miss)
+			n.dcal.wifi_global_set_beacon_miss(global_beacon_miss_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_beacon_miss != BEACON_MISS,
+				"Failed to set beacon miss: " + str(global_beacon_miss))
+
+	def test_0038_set_bt_coex(self):
+		BT_COEX = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_bt_coex_orig = n.dcal.wifi_global_get_bt_coex()
+			n.dcal.wifi_global_set_bt_coex(BT_COEX)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_bt_coex = n.dcal.wifi_global_get_bt_coex()
+			pprint.pprint(global_bt_coex)
+			n.dcal.wifi_global_set_bt_coex(global_bt_coex_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_bt_coex != BT_COEX,
+				"Failed to set BT coex: " + str(global_bt_coex))
+
+	def test_0039_set_ccx(self):
+		CCX = 0;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_ccx_orig = n.dcal.wifi_global_get_ccx()
+			n.dcal.wifi_global_set_ccx(CCX)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_ccx = n.dcal.wifi_global_get_ccx()
+			pprint.pprint(global_ccx)
+			n.dcal.wifi_global_set_ccx(global_ccx_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_ccx != CCX,
+				"Failed to set CCX: " + str(global_ccx))
+
+	def test_0039_set_cert_path(self):
+		CERT_PATH = "/etc/ssl/certs";
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_cert_path_orig = n.dcal.wifi_global_get_cert_path()
+			n.dcal.wifi_global_set_cert_path(CERT_PATH)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_cert_path = n.dcal.wifi_global_get_cert_path()
+			pprint.pprint(global_cert_path)
+			n.dcal.wifi_global_set_cert_path(global_cert_path_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_cert_path != CERT_PATH,
+				"Failed to set cert path: " + str(global_cert_path))
+
+	def test_0040_set_date_check(self):
+		DATE_CHECK = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_date_check_orig = n.dcal.wifi_global_get_date_check()
+			n.dcal.wifi_global_set_date_check(DATE_CHECK)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_date_check = n.dcal.wifi_global_get_date_check()
+			pprint.pprint(global_date_check)
+			n.dcal.wifi_global_set_date_check(global_date_check_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_date_check != DATE_CHECK,
+				"Failed to set date check: " + str(global_date_check))
+
+	def test_0041_set_def_adhoc_channel(self):
+		AD_HOC_CHAN = 6;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_def_adhoc_channel_orig = n.dcal.wifi_global_get_def_adhoc_channel()
+			n.dcal.wifi_global_set_def_adhoc_channel(AD_HOC_CHAN)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_def_adhoc_channel = n.dcal.wifi_global_get_def_adhoc_channel()
+			pprint.pprint(global_def_adhoc_channel)
+			n.dcal.wifi_global_set_def_adhoc_channel(global_def_adhoc_channel_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_def_adhoc_channel != AD_HOC_CHAN,
+				"Failed to set def adhoc channel: " + str(global_def_adhoc_channel))
+
+	def test_0041_set_dfs_channels(self):
+		DFS_CHANNELS = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_dfs_channels_orig = n.dcal.wifi_global_get_dfs_channels()
+			n.dcal.wifi_global_set_dfs_channels(DFS_CHANNELS)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_dfs_channels = n.dcal.wifi_global_get_dfs_channels()
+			pprint.pprint(global_dfs_channels)
+			n.dcal.wifi_global_set_dfs_channels(global_dfs_channels_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_dfs_channels != DFS_CHANNELS,
+				"Failed to set DFS channels: " + str(global_dfs_channels))
+
+	def test_0042_set_fips(self):
+		FIPS = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_fips_orig = n.dcal.wifi_global_get_fips()
+			n.dcal.wifi_global_set_fips(FIPS)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_fips = n.dcal.wifi_global_get_fips()
+			pprint.pprint(global_fips)
+			n.dcal.wifi_global_set_fips(global_fips_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_fips_test = n.dcal.wifi_global_get_fips()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_fips != FIPS,
+				"Failed to set FIPS: " + str(global_fips))
+
+	def test_0043_set_ignore_null_ssid(self):
+		IGNORE_NULL_SSID = 0;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_ignore_null_ssid_orig = n.dcal.wifi_global_get_ignore_null_ssid()
+			n.dcal.wifi_global_set_ignore_null_ssid(IGNORE_NULL_SSID)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_ignore_null_ssid = n.dcal.wifi_global_get_ignore_null_ssid()
+			pprint.pprint(global_ignore_null_ssid)
+			n.dcal.wifi_global_set_ignore_null_ssid(global_ignore_null_ssid_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_ignore_null_ssid != IGNORE_NULL_SSID,
+				"Failed to set ignore null SSID: " + str(global_ignore_null_ssid))
+
+	def test_0043_set_pmk(self):
+		PMK = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_pmk_orig = n.dcal.wifi_global_get_pmk()
+			n.dcal.wifi_global_set_pmk(PMK)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_pmk = n.dcal.wifi_global_get_pmk()
+			pprint.pprint(global_pmk)
+			n.dcal.wifi_global_set_pmk(global_pmk_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_pmk != PMK,
+				"Failed to set PMK: " + str(global_pmk))
+
+	def test_0044_set_probe_delay(self):
+		PROBE_DELAY = 15;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_probe_delay_orig = n.dcal.wifi_global_get_probe_delay()
+			n.dcal.wifi_global_set_probe_delay(PROBE_DELAY)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_probe_delay = n.dcal.wifi_global_get_probe_delay()
+			pprint.pprint(global_probe_delay)
+			n.dcal.wifi_global_set_probe_delay(global_probe_delay_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_probe_delay != PROBE_DELAY,
+				"Failed to set probe delay: " + str(global_probe_delay))
+
+	def test_0045_get_regdomain(self):
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_regdomain = n.dcal.wifi_global_get_regdomain()
+			pprint.pprint(global_regdomain)
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+	def test_0046_set_roam_period(self):
+		CHIPSET_40 = 5;
+		CHIPSET_45 = 6;
+		CHIPSET_50 = 7;
+		ROAM_PERIOD = 50;
+		ROAM_PERIOD_MS = 4000;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			chipset_version = n.dcal.chipset_version()
+			n.dcal.wifi_global_pull()
+			if ( chipset_version == CHIPSET_40 or chipset_version == CHIPSET_45):
+				global_roam_period_orig = n.dcal.wifi_global_get_roam_period()
+				n.dcal.wifi_global_set_roam_period(ROAM_PERIOD)
+			elif chipset_version == CHIPSET_50:
+				global_roam_periodms_orig = n.dcal.wifi_global_get_roam_periodms()
+				n.dcal.wifi_global_set_roam_periodms(ROAM_PERIOD_MS)
+
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			if ( chipset_version == CHIPSET_40 or chipset_version == CHIPSET_45):
+				global_roam_period = n.dcal.wifi_global_get_roam_period()
+				pprint.pprint(global_roam_period)
+				n.dcal.wifi_global_set_roam_period(global_roam_period_orig)
+			elif chipset_version == CHIPSET_50:
+				global_roam_periodms = n.dcal.wifi_global_get_roam_periodms()
+				pprint.pprint(global_roam_periodms)
+				n.dcal.wifi_global_set_roam_periodms(global_roam_periodms_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			if ( chipset_version == CHIPSET_40 or chipset_version == CHIPSET_45):
+				self.failIf(global_roam_period != ROAM_PERIOD,
+					"Failed to set roam period: " + str(global_roam_period))
+			elif chipset_version == CHIPSET_50:
+				self.failIf(global_roam_periodms != ROAM_PERIOD_MS,
+					"Failed to set roam period MS: " + str(global_roam_periodms))
+
+	def test_0047_set_roam_trigger(self):
+		ROAM_TRIGGER = 65;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_roam_trigger_orig = n.dcal.wifi_global_get_roam_trigger()
+			n.dcal.wifi_global_set_roam_trigger(ROAM_TRIGGER)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_roam_trigger = n.dcal.wifi_global_get_roam_trigger()
+			pprint.pprint(global_roam_trigger)
+			n.dcal.wifi_global_set_roam_trigger(global_roam_trigger_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_roam_trigger != ROAM_TRIGGER,
+				"Failed to set roam trigger: " + str(global_roam_trigger))
+
+	def test_0048_set_rts(self):
+		RTS = 2000;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_rts_orig = n.dcal.wifi_global_get_rts()
+			n.dcal.wifi_global_set_rts(RTS)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_rts = n.dcal.wifi_global_get_rts()
+			pprint.pprint(global_rts)
+			n.dcal.wifi_global_set_rts(global_rts_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_rts != RTS,
+				"Failed to set RTS: " + str(global_rts))
+
+	def test_0049_set_scan_dfs_time(self):
+		DFS_TIME = 60;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_scan_dfs_time_orig = n.dcal.wifi_global_get_scan_dfs_time()
+			n.dcal.wifi_global_set_scan_dfs_time(DFS_TIME)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_scan_dfs_time = n.dcal.wifi_global_get_scan_dfs_time()
+			pprint.pprint(global_scan_dfs_time)
+			n.dcal.wifi_global_set_scan_dfs_time(global_scan_dfs_time_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_scan_dfs_time != DFS_TIME,
+				"Failed to set scan DFS time: " + str(global_scan_dfs_time))
+
+	def test_0050_set_ttls_inner_method(self):
+		TTLS_INNER_METHOD = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_ttls_inner_method_orig = n.dcal.wifi_global_get_ttls_inner_method()
+			n.dcal.wifi_global_set_ttls_inner_method(TTLS_INNER_METHOD)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_ttls_inner_method = n.dcal.wifi_global_get_ttls_inner_method()
+			pprint.pprint(global_ttls_inner_method)
+			n.dcal.wifi_global_set_ttls_inner_method(global_ttls_inner_method_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_ttls_inner_method != TTLS_INNER_METHOD,
+				"Failed to set TTLS inner method: " + str(global_ttls_inner_method))
+
+	def test_0050_set_uapsd(self):
+		UAPSD = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_uapsd_orig = n.dcal.wifi_global_get_uapsd()
+			n.dcal.wifi_global_set_uapsd(UAPSD)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_uapsd = n.dcal.wifi_global_get_uapsd()
+			pprint.pprint(global_uapsd)
+			n.dcal.wifi_global_set_uapsd(global_uapsd_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_uapsd != UAPSD,
+				"Failed to set UAPSD: " + str(global_uapsd))
+
+	def test_0050_set_wmm(self):
+		WMM = 1;
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.wifi_global_pull()
+			global_uapsd_orig = n.dcal.wifi_global_get_uapsd()
+			n.dcal.wifi_global_set_uapsd(WMM)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.wifi_global_pull()
+			global_uapsd = n.dcal.wifi_global_get_uapsd()
+			pprint.pprint(global_uapsd)
+			n.dcal.wifi_global_set_uapsd(global_uapsd_orig)
+			n.dcal.wifi_global_push()
+			n.dcal.wifi_global_close_handle()
+			n.dcal.close()
+
+			self.failIf(global_uapsd != WMM,
+				"Failed to set WMM: " + str(global_uapsd))

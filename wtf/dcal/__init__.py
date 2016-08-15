@@ -223,6 +223,418 @@ class Dcal():
 			raise CommandError("Error when doing wifi_disable: ", ret)
 
 	#######################################################################
+	# WiFi Global Management
+	def wifi_global_create(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_create()
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_create: ", ret)
+
+	def wifi_global_pull(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_pull()
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_pull: ", ret)
+
+	def wifi_global_close_handle(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_close_handle()
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_close_handle: ", ret)
+
+	def wifi_global_push(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_push()
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_push: ", ret)
+
+	def wifi_global_set_auth_server(self, server_auth):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_auth_server(server_auth)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_auth_server: ", ret)
+
+	def wifi_global_get_auth_server(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		auth_server = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_auth_server( auth_server )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_auth_server: ", ret)
+		return auth_server.gen_int
+
+	def wifi_global_set_achannel_mask(self, channel_set_a):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_achannel_mask(channel_set_a)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_achannel_mask: ", ret)
+
+	def wifi_global_get_achannel_mask(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		channel_set_a = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_achannel_mask( channel_set_a )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_achannel_mask: ", ret)
+		return channel_set_a.gen_uint
+
+	def wifi_global_set_bchannel_mask(self, channel_set_b):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_bchannel_mask(channel_set_b)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_bchannel_mask: ", ret)
+
+	def wifi_global_get_bchannel_mask(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		channel_set_b = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_bchannel_mask( channel_set_b )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_bchannel_mask: ", ret)
+		return channel_set_b.gen_uint
+
+	def wifi_global_set_auto_profile(self, auto_profile):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_auto_profile(auto_profile)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_auto_profile: ", ret)
+
+	def wifi_global_get_auto_profile(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		auto_profile = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_auto_profile( auto_profile )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_auto_profile: ", ret)
+		return auto_profile.gen_int
+
+	def wifi_global_set_beacon_miss(self, beacon_miss):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_beacon_miss(beacon_miss)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_beacon_miss: ", ret)
+
+	def wifi_global_get_beacon_miss(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		beacon_miss = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_beacon_miss( beacon_miss )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_beacon_miss: ", ret)
+		return beacon_miss.gen_uint
+
+	def wifi_global_set_bt_coex(self, bt_coex):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_bt_coex(bt_coex)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_bt_coex: ", ret)
+
+	def wifi_global_get_bt_coex(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		bt_coex = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_bt_coex( bt_coex )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_bt_coex: ", ret)
+		return bt_coex.gen_int
+
+	def wifi_global_set_ccx(self, ccx):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_ccx(ccx)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_ccx: ", ret)
+
+	def wifi_global_get_ccx(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ccx = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_ccx( ccx )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_ccx: ", ret)
+		return ccx.gen_int
+
+	def wifi_global_set_cert_path(self, cert_path):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_cert_path(cert_path)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_cert_path: ", ret)
+
+	def wifi_global_get_cert_path(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		cert_path = dcal_py.generic_string()
+		ret = self.d.wifi_global_get_cert_path( cert_path )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_cert_path: ", ret)
+		return cert_path.gen_string()
+
+	def wifi_global_set_date_check(self, date_check):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_date_check(date_check)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_date_check: ", ret)
+
+	def wifi_global_get_date_check(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		date_check = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_date_check( date_check )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_date_check: ", ret)
+		return date_check.gen_int
+
+	def wifi_global_set_def_adhoc_channel(self, def_adhoc_channel):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_def_adhoc_channel(def_adhoc_channel)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_def_adhoc_channel: ", ret)
+
+	def wifi_global_get_def_adhoc_channel(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		def_adhoc_channel = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_def_adhoc_channel( def_adhoc_channel )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_def_adhoc_channel: ", ret)
+		return def_adhoc_channel.gen_uint
+
+	def wifi_global_set_fips(self, fips):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_fips(fips)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_fips: ", ret)
+
+	def wifi_global_get_fips(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		fips = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_fips( fips )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_fips: ", ret)
+		return fips.gen_int
+
+	def wifi_global_set_pmk(self, pmk):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_pmk(pmk)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_pmk: ", ret)
+
+	def wifi_global_get_pmk(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		pmk = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_pmk( pmk )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_pmk: ", ret)
+		return pmk.gen_int
+
+	def wifi_global_set_probe_delay(self, probe_delay):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_probe_delay(probe_delay)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_probe_delay: ", ret)
+
+	def wifi_global_get_probe_delay(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		probe_delay = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_probe_delay( probe_delay )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_probe_delay: ", ret)
+		return probe_delay.gen_uint
+
+	def wifi_global_get_regdomain(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		regdomain = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_regdomain( regdomain )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_regdomain: ", ret)
+		return regdomain.gen_int
+
+	def wifi_global_set_roam_period(self, roam_period):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_roam_period(roam_period)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_roam_period: ", ret)
+
+	def wifi_global_get_roam_period(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		roam_period = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_roam_period( roam_period )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_roam_period: ", ret)
+		return roam_period.gen_uint
+
+	def wifi_global_set_roam_periodms(self, roam_periodms):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_roam_periodms(roam_periodms)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_roam_periodms: ", ret)
+
+	def wifi_global_get_roam_periodms(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		roam_periodms = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_roam_periodms( roam_periodms )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_roam_periodms: ", ret)
+		return roam_periodms.gen_uint
+
+	def wifi_global_set_roam_trigger(self, roam_trigger):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_roam_trigger(roam_trigger)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_roam_trigger: ", ret)
+
+	def wifi_global_get_roam_trigger(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		roam_trigger = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_roam_trigger( roam_trigger )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_roam_trigger: ", ret)
+		return roam_trigger.gen_uint
+
+	def wifi_global_set_rts(self, rts):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_rts(rts)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_rts: ", ret)
+
+	def wifi_global_get_rts(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		rts = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_rts( rts )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_rts: ", ret)
+		return rts.gen_uint
+
+	def wifi_global_set_scan_dfs_time(self, scan_dfs):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_scan_dfs_time(scan_dfs)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_scan_dfs_time: ", ret)
+
+	def wifi_global_get_scan_dfs_time(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_dfs = dcal_py.generic_uint()
+		ret = self.d.wifi_global_get_scan_dfs_time( scan_dfs )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_scan_dfs_time: ", ret)
+		return scan_dfs.gen_uint
+
+	def wifi_global_set_ttls_inner_method(self, ttls_inner):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_ttls_inner_method(ttls_inner)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_ttls_inner_method: ", ret)
+
+	def wifi_global_get_ttls_inner_method(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ttls_inner = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_ttls_inner_method( ttls_inner )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_ttls_inner_method: ", ret)
+		return ttls_inner.gen_int
+
+	def wifi_global_set_uapsd(self, uapsd):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_uapsd(uapsd)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_uapsd: ", ret)
+
+	def wifi_global_get_uapsd(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		uapsd = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_uapsd( uapsd )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_uapsd: ", ret)
+		return uapsd.gen_int
+
+	def wifi_global_set_wmm(self, wmm):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_wmm(wmm)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_wmm: ", ret)
+
+	def wifi_global_get_wmm(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		wmm = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_wmm( wmm )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_wmm: ", ret)
+		return wmm.gen_int
+
+	def wifi_global_set_ignore_null_ssid(self, ignore_null_ssid):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_ignore_null_ssid(ignore_null_ssid)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_ignore_null_ssid: ", ret)
+
+	def wifi_global_get_ignore_null_ssid(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ignore_null_ssid = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_ignore_null_ssid( ignore_null_ssid )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_ignore_null_ssid: ", ret)
+		return ignore_null_ssid.gen_int
+
+	def wifi_global_set_dfs_channels(self, dfs):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.wifi_global_set_dfs_channels(dfs)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_global_set_dfs_channels: ", ret)
+
+	def wifi_global_get_dfs_channels(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		dfs = dcal_py.generic_int()
+		ret = self.d.wifi_global_get_dfs_channels( dfs )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_global_get_dfs_channels: ", ret)
+		return dfs.gen_int
+
+	def wifi_global_printf(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		self.d.wifi_global_printf()
+
+	#######################################################################
 	# WiFi Profile Management
 	def wifi_profile_create(self):
 		if not self.is_open:
