@@ -131,10 +131,15 @@ class TestDCAL(unittest.TestCase):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.status_pull()
-			tcp_dict = n.dcal.status_get_tcp()
-			pprint.pprint(tcp_dict) # only see this if doing ./run -s
+			ipv4_dict = n.dcal.device_status_get_ipv4()
+			pprint.pprint(ipv4_dict) # only see this if doing ./run -s
 			# We don't know our current expected state, so we don't
 			# want to validate the garbage that may be returned
+			ipv6_count = n.dcal.device_status_get_ipv6_count()
+			for index in range(0,ipv6_count):
+				ipv6_dict = n.dcal.device_status_get_ipv6_string_at_index(index)
+				pprint.pprint(ipv6_dict)
+
 			n.dcal.close()
 
 	def test_0014_status_connection(self):

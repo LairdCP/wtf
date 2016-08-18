@@ -163,18 +163,32 @@ class Dcal():
 		}
 		return ccx_dict
 
-	def status_get_tcp(self):
+	def device_status_get_ipv4(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
-		wb_tcp = dcal_py.tcp()
-		ret = self.d.device_status_get_tcp( wb_tcp )
+		ipv4_addr = dcal_py.generic_string()
+		ret = self.d.device_status_get_ipv4( ipv4_addr )
 		if ret != 0:
-			raise CommandError("Error when processing tcp: ", ret)
-		tcp_dict = {
-			'ipv4': wb_tcp.ipv4(),
-			'ipv6': wb_tcp.ipv6(),
-		}
-		return tcp_dict
+			raise CommandError("Error when processing device_status_get_ipv4: ", ret)
+		return ipv4_addr.gen_string()
+
+	def device_status_get_ipv6_count(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ipv6_count = dcal_py.generic_int()
+		ret = self.d.device_status_get_ipv6_count( ipv6_count )
+		if ret != 0:
+			raise CommandError("Error when processing device_status_get_ipv6_count: ", ret)
+		return ipv6_count.gen_int
+
+	def device_status_get_ipv6_string_at_index(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ipv6_addr = dcal_py.generic_string()
+		ret = self.d.device_status_get_ipv6_string_at_index(index, ipv6_addr )
+		if ret != 0:
+			raise CommandError("Error when processing device_status_get_ipv6_string_at_index: ", ret)
+		return ipv6_addr.gen_string()
 
 	def status_get_connection(self):
 		if not self.is_open:
