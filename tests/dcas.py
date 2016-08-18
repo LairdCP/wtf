@@ -1035,43 +1035,24 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.close()
 
 	def test_0046_set_roam_period(self):
-		CHIPSET_40 = 5;
-		CHIPSET_45 = 6;
-		CHIPSET_50 = 7;
-		ROAM_PERIOD = 50;
 		ROAM_PERIOD_MS = 4000;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
-			chipset_version = n.dcal.chipset_version()
 			n.dcal.wifi_global_pull()
-			if ( chipset_version == CHIPSET_40 or chipset_version == CHIPSET_45):
-				global_roam_period_orig = n.dcal.wifi_global_get_roam_period()
-				n.dcal.wifi_global_set_roam_period(ROAM_PERIOD)
-			elif chipset_version == CHIPSET_50:
-				global_roam_periodms_orig = n.dcal.wifi_global_get_roam_periodms()
-				n.dcal.wifi_global_set_roam_periodms(ROAM_PERIOD_MS)
-
+			global_roam_periodms_orig = n.dcal.wifi_global_get_roam_periodms()
+			n.dcal.wifi_global_set_roam_periodms(ROAM_PERIOD_MS)
 			n.dcal.wifi_global_push()
 			n.dcal.wifi_global_close_handle()
 			n.dcal.wifi_global_pull()
-			if ( chipset_version == CHIPSET_40 or chipset_version == CHIPSET_45):
-				global_roam_period = n.dcal.wifi_global_get_roam_period()
-				pprint.pprint(global_roam_period)
-				n.dcal.wifi_global_set_roam_period(global_roam_period_orig)
-			elif chipset_version == CHIPSET_50:
-				global_roam_periodms = n.dcal.wifi_global_get_roam_periodms()
-				pprint.pprint(global_roam_periodms)
-				n.dcal.wifi_global_set_roam_periodms(global_roam_periodms_orig)
+			global_roam_periodms = n.dcal.wifi_global_get_roam_periodms()
+			pprint.pprint(global_roam_periodms)
+			n.dcal.wifi_global_set_roam_periodms(global_roam_periodms_orig)
 			n.dcal.wifi_global_push()
 			n.dcal.wifi_global_close_handle()
 			n.dcal.close()
 
-			if ( chipset_version == CHIPSET_40 or chipset_version == CHIPSET_45):
-				self.failIf(global_roam_period != ROAM_PERIOD,
-					"Failed to set roam period: " + str(global_roam_period))
-			elif chipset_version == CHIPSET_50:
-				self.failIf(global_roam_periodms != ROAM_PERIOD_MS,
-					"Failed to set roam period MS: " + str(global_roam_periodms))
+			self.failIf(global_roam_periodms != ROAM_PERIOD_MS,
+				"Failed to set roam period MS: " + str(global_roam_periodms))
 
 	def test_0047_set_roam_trigger(self):
 		ROAM_TRIGGER = 65;

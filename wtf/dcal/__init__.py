@@ -483,22 +483,6 @@ class Dcal():
 			raise CommandError("Error when processing wifi_global_get_regdomain: ", ret)
 		return regdomain.gen_int
 
-	def wifi_global_set_roam_period(self, roam_period):
-		if not self.is_open:
-			raise SessionError("Error session is not open")
-		ret = self.d.wifi_global_set_roam_period(roam_period)
-		if ret != 0:
-			raise CommandError("Error when doing wifi_global_set_roam_period: ", ret)
-
-	def wifi_global_get_roam_period(self):
-		if not self.is_open:
-			raise SessionError("Error session is not open")
-		roam_period = dcal_py.generic_uint()
-		ret = self.d.wifi_global_get_roam_period( roam_period )
-		if ret != 0:
-			raise CommandError("Error when processing wifi_global_get_roam_period: ", ret)
-		return roam_period.gen_uint
-
 	def wifi_global_set_roam_periodms(self, roam_periodms):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
