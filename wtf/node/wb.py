@@ -118,6 +118,16 @@ class WB45(WBBase):
 			raise node.UninitializedError('Not logged in')
 		o = self._cmd_or_die('fw_update -xntr -f ' + url)
 
+	def fw_update_tm(self, state):
+		if self.loggedIn != True:
+			raise node.UninitializedError('Not logged in')
+		if state == True:
+			o = self._cmd_or_die('touch /etc/default/fw_update.test')
+		elif state == False:
+			o = self._cmd_or_die('rm /etc/default/fw_update.test')
+		else:
+			raise node.ActionFailureError("Unknown state entered: " + str(state))
+
 	def wait_check(self, cmd):
 		if self.loggedIn != True:
 			raise node.UninitializedError('Not logged in')

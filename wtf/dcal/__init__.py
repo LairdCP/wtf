@@ -1097,3 +1097,40 @@ class Dcal():
 		ret = self.d.ntpdate(server_name)
 		if ret != 0:
 			raise CommandError("Error when doing ntpdate: ", ret)
+
+	#######################################################################
+	# file controls
+	def file_push_to_wb(self, local_file_name, remote_file_name):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.file_push_to_wb(local_file_name, remote_file_name)
+		if ret != 0:
+			raise CommandError("Error when doing file_push_to_wb: ", ret)
+
+	def file_pull_from_wb(self, local_file_name, remote_file_name):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.file_pull_from_wb(local_file_name, remote_file_name)
+		if ret != 0:
+			raise CommandError("Error when doing file_pull_from_wb: ", ret)
+
+	def fw_update(self, flags):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.fw_update(flags)
+		if ret != 0:
+			raise CommandError("Error when doing fw_update: ", ret)
+
+	def pull_logs(self, dest_file):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.pull_logs(dest_file)
+		if ret != 0:
+			raise CommandError("Error when doing pull_logs: ", ret)
+
+	def process_cli_command_file(self, src_file):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		ret = self.d.process_cli_command_file(src_file)
+		if ret != 0:
+			raise CommandError("Error when doing process_cli_command_file: ", ret)

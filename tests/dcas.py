@@ -8,6 +8,9 @@ import wtfconfig
 import time
 import pprint
 import unittest
+import filecmp
+import io
+import os
 
 def setUp(self):
 	# start with all of the nodes running, but in a clean state
@@ -1199,3 +1202,91 @@ class TestDCAL(unittest.TestCase):
 
 			self.failIf(time_dict_orig['tv_usec'] >= time_dict_now['tv_usec'] >= time_dict_later['tv_usec'],
 				"Failed to set time, tv_usec out of bounds: " + str(time_dict_now['tv_usec']))
+
+	def test_0055_file_pull_from_wb(self):
+		PUSH_LOCAL_FILE = "test_file";
+		PUSH_REMOTE_FILE = None;
+		PULL_REMOTE_FILE = "/tmp/test_file";
+		PULL_LOCAL_FILE = "test_file_pulled";
+		fo = open(PUSH_LOCAL_FILE, "w")
+		for line in range(0,100):
+			for num in range(0,50):
+				fo.write(str(num))
+			fo.write("\n")
+		fo.close()
+
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.file_push_to_wb(PUSH_LOCAL_FILE, PUSH_REMOTE_FILE);
+			n.dcal.file_pull_from_wb(PULL_REMOTE_FILE, PULL_LOCAL_FILE);
+			n.dcal.close()
+
+		self.failIf(filecmp.cmp(PUSH_LOCAL_FILE, PULL_LOCAL_FILE) != True,
+			"Failed to push/pull file, files do not match")
+
+		os.remove(PUSH_LOCAL_FILE)
+		os.remove(PULL_LOCAL_FILE)
+
+	def test_0056_pull_logs(self):
+		DEST_FILE = "test_logs";
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.pull_logs(DEST_FILE);
+			n.dcal.close()
+
+		self.failIf(os.stat(DEST_FILE).st_size == 0,
+			"Failed to pull logs, file is empty")
+
+		os.remove(DEST_FILE)
+
+	def test_0057_fw_update(self):
+		FW_FILE = wtfconfig.fw_update_dir + "fw.txt";
+		AT91BS_FILE = wtfconfig.fw_update_dir + "at91bs.bin";
+		UBOOT_FILE = wtfconfig.fw_update_dir + "u-boot.bin";
+		KERNEL_FILE = wtfconfig.fw_update_dir + "kernel.bin";
+		ROOTFS_FILE = wtfconfig.fw_update_dir + "rootfs.bin";
+		FLAGS = 1 << 0; #FWU_FORCE
+		REMOTE_FILE = "/tmp/fw_update.out";
+		LOCAL_FILE = "fw_update.out";
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.file_push_to_wb(FW_FILE, "fw.txt");
+			n.dcal.file_push_to_wb(AT91BS_FILE, None);
+			n.dcal.file_push_to_wb(UBOOT_FILE, None);
+			n.dcal.file_push_to_wb(KERNEL_FILE, None);
+			n.dcal.file_push_to_wb(ROOTFS_FILE, None);
+			n.fw_update_tm(True);
+			n.dcal.fw_update(FLAGS);
+			n.fw_update_tm(False);
+			n.dcal.file_pull_from_wb(REMOTE_FILE, LOCAL_FILE);
+			UPDATE_FAILURE = False;
+			if 'Errors' in open(LOCAL_FILE).read():
+				UPDATE_FAILURE = True;
+			n.dcal.close()
+
+			self.failIf(UPDATE_FAILURE,
+				"Failed to perform update")
+
+		os.remove(LOCAL_FILE)
+
+	def test_0058_process_cli_command_file(self):
+		PUSH_CMD_FILE = "test_cmd_file";
+		PROFILENAME = "wtf_cli_process"
+		fo = open(PUSH_CMD_FILE, "w")
+		fo.write("profile " + PROFILENAME + " add")
+		fo.close()
+
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			n.dcal.process_cli_command_file(PUSH_CMD_FILE);
+			n.dcal.wifi_profile_pull(PROFILENAME)
+			profile_profilename = n.dcal.wifi_profile_get_profilename()
+			pprint.pprint(profile_profilename)
+			n.dcal.wifi_profile_close_handle()
+			n.dcal.wifi_profile_delete_from_device(PROFILENAME)
+			n.dcal.close()
+
+			self.failIf(profile_profilename != PROFILENAME,
+				"Failed to set profile via cli command file: " + str(profile_profilename))
+
+		os.remove(PUSH_CMD_FILE)
