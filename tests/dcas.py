@@ -825,27 +825,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_beacon_miss != BEACON_MISS,
 				"Failed to set beacon miss: " + str(global_beacon_miss))
 
-	def test_0038_set_bt_coex(self):
-		BT_COEX = 1;
-		for n in wtfconfig.nodes:
-			n.dcal.open()
-			n.dcal.wifi_global_pull()
-			global_bt_coex_orig = n.dcal.wifi_global_get_bt_coex()
-			n.dcal.wifi_global_set_bt_coex(BT_COEX)
-			n.dcal.wifi_global_push()
-			n.dcal.wifi_global_close_handle()
-			n.dcal.wifi_global_pull()
-			global_bt_coex = n.dcal.wifi_global_get_bt_coex()
-			pprint.pprint(global_bt_coex)
-			n.dcal.wifi_global_set_bt_coex(global_bt_coex_orig)
-			n.dcal.wifi_global_push()
-			n.dcal.wifi_global_close_handle()
-			n.dcal.close()
-
-			self.failIf(global_bt_coex != BT_COEX,
-				"Failed to set BT coex: " + str(global_bt_coex))
-
-	def test_0039_set_ccx(self):
+	def test_0038_set_ccx(self):
 		CCX = 0;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -925,7 +905,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_def_adhoc_channel != AD_HOC_CHAN,
 				"Failed to set def adhoc channel: " + str(global_def_adhoc_channel))
 
-	def test_0041_set_dfs_channels(self):
+	def test_0042_set_dfs_channels(self):
 		DFS_CHANNELS = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -945,7 +925,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_dfs_channels != DFS_CHANNELS,
 				"Failed to set DFS channels: " + str(global_dfs_channels))
 
-	def test_0042_set_fips(self):
+	def test_0043_set_fips(self):
 		FIPS = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -968,7 +948,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_fips != FIPS,
 				"Failed to set FIPS: " + str(global_fips))
 
-	def test_0043_set_ignore_null_ssid(self):
+	def test_0044_set_ignore_null_ssid(self):
 		IGNORE_NULL_SSID = 0;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -988,7 +968,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_ignore_null_ssid != IGNORE_NULL_SSID,
 				"Failed to set ignore null SSID: " + str(global_ignore_null_ssid))
 
-	def test_0043_set_pmk(self):
+	def test_0045_set_pmk(self):
 		PMK = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1008,7 +988,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_pmk != PMK,
 				"Failed to set PMK: " + str(global_pmk))
 
-	def test_0044_set_probe_delay(self):
+	def test_0046_set_probe_delay(self):
 		PROBE_DELAY = 15;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1028,7 +1008,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_probe_delay != PROBE_DELAY,
 				"Failed to set probe delay: " + str(global_probe_delay))
 
-	def test_0045_get_regdomain(self):
+	def test_0047_get_regdomain(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.wifi_global_pull()
@@ -1037,7 +1017,7 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_global_close_handle()
 			n.dcal.close()
 
-	def test_0046_set_roam_period(self):
+	def test_0048_set_roam_period(self):
 		ROAM_PERIOD_MS = 4000;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1057,7 +1037,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_roam_periodms != ROAM_PERIOD_MS,
 				"Failed to set roam period MS: " + str(global_roam_periodms))
 
-	def test_0047_set_roam_trigger(self):
+	def test_0049_set_roam_trigger(self):
 		ROAM_TRIGGER = 65;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1077,7 +1057,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_roam_trigger != ROAM_TRIGGER,
 				"Failed to set roam trigger: " + str(global_roam_trigger))
 
-	def test_0048_set_rts(self):
+	def test_0050_set_rts(self):
 		RTS = 2000;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1097,7 +1077,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_rts != RTS,
 				"Failed to set RTS: " + str(global_rts))
 
-	def test_0049_set_scan_dfs_time(self):
+	def test_0051_set_scan_dfs_time(self):
 		DFS_TIME = 60;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1117,7 +1097,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_scan_dfs_time != DFS_TIME,
 				"Failed to set scan DFS time: " + str(global_scan_dfs_time))
 
-	def test_0050_set_ttls_inner_method(self):
+	def test_0052_set_ttls_inner_method(self):
 		TTLS_INNER_METHOD = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1137,7 +1117,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_ttls_inner_method != TTLS_INNER_METHOD,
 				"Failed to set TTLS inner method: " + str(global_ttls_inner_method))
 
-	def test_0051_set_uapsd(self):
+	def test_0053_set_uapsd(self):
 		UAPSD = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1157,7 +1137,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_uapsd != UAPSD,
 				"Failed to set UAPSD: " + str(global_uapsd))
 
-	def test_0052_set_wmm(self):
+	def test_0054_set_wmm(self):
 		WMM = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1178,7 +1158,7 @@ class TestDCAL(unittest.TestCase):
 				"Failed to set WMM: " + str(global_uapsd))
 
 
-	def test_0053_set_ntpdate(self):
+	def test_0055_set_ntpdate(self):
 		GOOD_FQDN = "pool.ntp.org";
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1187,7 +1167,7 @@ class TestDCAL(unittest.TestCase):
 			pprint.pprint(time_dict)
 			n.dcal.close()
 
-	def test_0054_set_time(self):
+	def test_0056_set_time(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			time_dict_orig = n.dcal.time_get()
@@ -1203,7 +1183,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(time_dict_orig['tv_usec'] >= time_dict_now['tv_usec'] >= time_dict_later['tv_usec'],
 				"Failed to set time, tv_usec out of bounds: " + str(time_dict_now['tv_usec']))
 
-	def test_0055_file_pull_from_wb(self):
+	def test_0057_file_pull_from_wb(self):
 		PUSH_LOCAL_FILE = "test_file";
 		PUSH_REMOTE_FILE = None;
 		PULL_REMOTE_FILE = "/tmp/test_file";
@@ -1227,7 +1207,7 @@ class TestDCAL(unittest.TestCase):
 		os.remove(PUSH_LOCAL_FILE)
 		os.remove(PULL_LOCAL_FILE)
 
-	def test_0056_pull_logs(self):
+	def test_0058_pull_logs(self):
 		DEST_FILE = "test_logs";
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1239,7 +1219,7 @@ class TestDCAL(unittest.TestCase):
 
 		os.remove(DEST_FILE)
 
-	def test_0057_fw_update(self):
+	def test_0059_fw_update(self):
 		FW_FILE = wtfconfig.fw_update_dir + "fw.txt";
 		AT91BS_FILE = wtfconfig.fw_update_dir + "at91bs.bin";
 		UBOOT_FILE = wtfconfig.fw_update_dir + "u-boot.bin";
@@ -1269,7 +1249,7 @@ class TestDCAL(unittest.TestCase):
 
 		os.remove(LOCAL_FILE)
 
-	def test_0058_process_cli_command_file(self):
+	def test_0060_process_cli_command_file(self):
 		PUSH_CMD_FILE = "test_cmd_file";
 		PROFILENAME = "wtf_cli_process"
 		fo = open(PUSH_CMD_FILE, "w")

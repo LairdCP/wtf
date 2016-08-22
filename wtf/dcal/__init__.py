@@ -346,22 +346,6 @@ class Dcal():
 			raise CommandError("Error when processing wifi_global_get_beacon_miss: ", ret)
 		return beacon_miss.gen_uint
 
-	def wifi_global_set_bt_coex(self, bt_coex):
-		if not self.is_open:
-			raise SessionError("Error session is not open")
-		ret = self.d.wifi_global_set_bt_coex(bt_coex)
-		if ret != 0:
-			raise CommandError("Error when doing wifi_global_set_bt_coex: ", ret)
-
-	def wifi_global_get_bt_coex(self):
-		if not self.is_open:
-			raise SessionError("Error session is not open")
-		bt_coex = dcal_py.generic_int()
-		ret = self.d.wifi_global_get_bt_coex( bt_coex )
-		if ret != 0:
-			raise CommandError("Error when processing wifi_global_get_bt_coex: ", ret)
-		return bt_coex.gen_int
-
 	def wifi_global_set_ccx(self, ccx):
 		if not self.is_open:
 			raise SessionError("Error session is not open")
