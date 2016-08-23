@@ -110,7 +110,7 @@ class TestDCAL(unittest.TestCase):
 			# different releases, we don't check the return
 			n.dcal.close()
 
-	def test_0011_status_settings(self):
+	def test_status_settings(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.status_pull()
@@ -120,7 +120,7 @@ class TestDCAL(unittest.TestCase):
 			# want to validate the garbage that may be returned
 			n.dcal.close()
 
-	def test_0012_status_ccx(self):
+	def test_status_ccx(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.status_pull()
@@ -130,7 +130,7 @@ class TestDCAL(unittest.TestCase):
 			# want to validate the garbage that may be returned
 			n.dcal.close()
 
-	def test_0013_status_tcp(self):
+	def test_status_tcp(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.status_pull()
@@ -145,7 +145,7 @@ class TestDCAL(unittest.TestCase):
 
 			n.dcal.close()
 
-	def test_0014_status_connection(self):
+	def test_status_connection(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.status_pull()
@@ -155,7 +155,7 @@ class TestDCAL(unittest.TestCase):
 			# want to validate the garbage that may be returned
 			n.dcal.close()
 
-	def test_0015_status_connection_extended(self):
+	def test_status_connection_extended(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.status_pull()
@@ -165,7 +165,7 @@ class TestDCAL(unittest.TestCase):
 			# want to validate the garbage that may be returned
 			n.dcal.close()
 
-	def test_0016_wifi_disable(self):
+	def test_wifi_disable(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.wifi_disable()
@@ -177,7 +177,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(int(connection_dict['cardstate']) != 6,
 				"Failed to disable WiFi: " + str(connection_dict['cardstate']))
 
-	def test_0017_wifi_enable(self):
+	def test_wifi_enable(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.wifi_enable()
@@ -189,7 +189,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf((int(connection_dict['cardstate']) != 1 | int(connection_dict['cardstate']) != 2 | int(connection_dict['cardstate']) != 3),
 				"Failed to enable WiFi: " + str(connection_dict['cardstate']))
 
-	def test_0018_status_settings_default_profile(self):
+	def test_status_settings_default_profile(self):
 		testProfileName = "Default"
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -202,7 +202,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(setting_dict['profilename'] != testProfileName,
 				"Failed to set profile: " + str(setting_dict['profilename']))
 
-	def test_0019_create_open_profile(self):
+	def test_create_open_profile(self):
 		newProfileName = "wtf_open"
 		SSID = "wtf_open_SSID"
 		for n in wtfconfig.nodes:
@@ -227,7 +227,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_SSID_dict['val'] != SSID,
 				"Failed to set SSID: " + str(profile_SSID_dict['val']))
 
-	def test_0020_create_wep_profile(self):
+	def test_create_wep_profile(self):
 		newProfileName = "wtf_wep"
 		SSID = "wtf_wep_SSID"
 		ES_WEP = 1
@@ -273,7 +273,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_wep_txkey != WEPINDEX,
 				"Failed to set WEP TX key: " + str(profile_wep_txkey))
 
-	def test_0021_create_wpa2_aes_psk_profile(self):
+	def test_create_wpa2_aes_psk_profile(self):
 		newProfileName = "wtf_wpa2_aes_psk"
 		SSID = "wtf_wpa2_aes_psk_SSID"
 		PSK = "wtf_wpa2_aes_PSK"
@@ -319,7 +319,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_psk != True,
 				"Failed to set psk: " + str(profile_psk))
 
-	def test_0022_create_wpa2_aes_eapfast_profile(self):
+	def test_create_wpa2_aes_eapfast_profile(self):
 		newProfileName = "wtf_wpa2_eapfast_mschap"
 		SSID = "wtf_wpa2_aes_eapfast_SSID"
 		ES_WPA2 = 3
@@ -393,7 +393,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_pacprofile_password != True,
 				"Failed to set PAC password: " + str(profile_pacprofile_password))
 
-	def test_0023_create_wpa2_aes_mschap_profile(self):
+	def test_create_wpa2_aes_mschap_profile(self):
 		newProfileName = "wtf_wpa2_aes_mschap"
 		SSID = "wtf_wpa2_aes_mschap_SSID"
 		ES_WPA2 = 3
@@ -460,7 +460,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_cacert != True,
 				"Failed to set usercert password: " + str(profile_cacert))
 
-	def test_0024_create_wpa2_aes_eap_tls_profile(self):
+	def test_create_wpa2_aes_eap_tls_profile(self):
 		newProfileName = "wtf_wpa2_aes_eap_tls"
 		SSID = "wtf_wpa2_aes_eap_tls_SSID"
 		ES_WPA2 = 3
@@ -535,7 +535,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_cacert != True,
 				"Failed to set usercert password: " + str(profile_cacert))
 
-	def test_0025_set_clientname(self):
+	def test_set_clientname(self):
 		newProfileName = "wtf_clientname"
 		CLIENTNAME = "wtf_clientname"
 		for n in wtfconfig.nodes:
@@ -560,7 +560,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_clientname != CLIENTNAME,
 				"Failed to set clientname: " + str(profile_clientname))
 
-	def test_0026_set_radiomode(self):
+	def test_set_radiomode(self):
 		newProfileName = "wtf_radiomode"
 		RADIOMODE_BG = 1;
 		for n in wtfconfig.nodes:
@@ -585,7 +585,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_radiomode != RADIOMODE_BG,
 				"Failed to set radiomode: " + str(profile_radiomode))
 
-	def test_0027_set_powersave(self):
+	def test_set_powersave(self):
 		newProfileName = "wtf_powersave"
 		POWERSAVE_OFF = 0;
 		for n in wtfconfig.nodes:
@@ -610,7 +610,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_powersave != POWERSAVE_OFF,
 				"Failed to set powersave: " + str(profile_powersave))
 
-	def test_0028_set_psp_delay(self):
+	def test_set_psp_delay(self):
 		newProfileName = "wtf_psp_delay"
 		PSPDELAY = 201;
 		for n in wtfconfig.nodes:
@@ -635,7 +635,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_pspdelay != PSPDELAY,
 				"Failed to set pspdelay: " + str(profile_pspdelay))
 
-	def test_0029_set_txpower(self):
+	def test_set_txpower(self):
 		newProfileName = "wtf_txpower"
 		TXPOWER = 10;
 		for n in wtfconfig.nodes:
@@ -660,7 +660,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_txpower != TXPOWER,
 				"Failed to set txpower: " + str(profile_txpower))
 
-	def test_0030_set_bitrate(self):
+	def test_set_bitrate(self):
 		newProfileName = "wtf_bitrate"
 		BITRATE = 22;
 		for n in wtfconfig.nodes:
@@ -685,7 +685,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_bitrate != BITRATE,
 				"Failed to set bitrate: " + str(profile_bitrate))
 
-	def test_0031_set_autoprofile(self):
+	def test_set_autoprofile(self):
 		newProfileName = "wtf_autoprofile"
 		ON = 1;
 		OFF = 0;
@@ -717,7 +717,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(profile_autoprofile_off != OFF,
 				"Failed to set autoprofile: " + str(profile_autoprofile_off))
 
-	def test_0032_wifi_restart(self):
+	def test_wifi_restart(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.wifi_restart()
@@ -730,7 +730,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf((int(connection_dict['cardstate']) != 1 | int(connection_dict['cardstate']) != 2 | int(connection_dict['cardstate']) != 3),
 				"Failed to disable WiFi: " + str(connection_dict['cardstate']))
 
-	def test_0033_system_restart(self):
+	def test_system_restart(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.system_restart()
@@ -745,7 +745,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf((int(connection_dict['cardstate']) != 1 | int(connection_dict['cardstate']) != 2 | int(connection_dict['cardstate']) != 3),
 				"Failed to enable WiFi: " + str(connection_dict['cardstate']))
 
-	def test_0034_set_auth_server(self):
+	def test_set_auth_server(self):
 		TYPE2 = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -765,7 +765,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_server_auth != TYPE2,
 				"Failed to set server auth: " + str(global_server_auth))
 
-	def test_0035_set_achannel_mask(self):
+	def test_set_achannel_mask(self):
 		AMASK = 0;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -785,7 +785,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_achannel_mask != AMASK,
 				"Failed to set A channel mask: " + str(global_achannel_mask))
 
-	def test_0036_set_bchannel_mask(self):
+	def test_set_bchannel_mask(self):
 		BMASK = 0;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -805,7 +805,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_bchannel_mask != BMASK,
 				"Failed to set B channel mask: " + str(global_bchannel_mask))
 
-	def test_0037_set_beacon_miss(self):
+	def test_set_beacon_miss(self):
 		BEACON_MISS = 2000;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -825,7 +825,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_beacon_miss != BEACON_MISS,
 				"Failed to set beacon miss: " + str(global_beacon_miss))
 
-	def test_0038_set_ccx(self):
+	def test_set_ccx(self):
 		CCX = 0;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -845,7 +845,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_ccx != CCX,
 				"Failed to set CCX: " + str(global_ccx))
 
-	def test_0039_set_cert_path(self):
+	def test_set_cert_path(self):
 		CERT_PATH = "/etc/ssl/certs";
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -865,7 +865,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_cert_path != CERT_PATH,
 				"Failed to set cert path: " + str(global_cert_path))
 
-	def test_0040_set_date_check(self):
+	def test_set_date_check(self):
 		DATE_CHECK = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -885,7 +885,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_date_check != DATE_CHECK,
 				"Failed to set date check: " + str(global_date_check))
 
-	def test_0041_set_def_adhoc_channel(self):
+	def test_set_def_adhoc_channel(self):
 		AD_HOC_CHAN = 6;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -905,7 +905,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_def_adhoc_channel != AD_HOC_CHAN,
 				"Failed to set def adhoc channel: " + str(global_def_adhoc_channel))
 
-	def test_0042_set_dfs_channels(self):
+	def test_set_dfs_channels(self):
 		DFS_CHANNELS = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -925,7 +925,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_dfs_channels != DFS_CHANNELS,
 				"Failed to set DFS channels: " + str(global_dfs_channels))
 
-	def test_0043_set_fips(self):
+	def test_set_fips(self):
 		FIPS = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -948,7 +948,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_fips != FIPS,
 				"Failed to set FIPS: " + str(global_fips))
 
-	def test_0044_set_ignore_null_ssid(self):
+	def test_set_ignore_null_ssid(self):
 		IGNORE_NULL_SSID = 0;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -968,7 +968,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_ignore_null_ssid != IGNORE_NULL_SSID,
 				"Failed to set ignore null SSID: " + str(global_ignore_null_ssid))
 
-	def test_0045_set_pmk(self):
+	def test_set_pmk(self):
 		PMK = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -988,7 +988,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_pmk != PMK,
 				"Failed to set PMK: " + str(global_pmk))
 
-	def test_0046_set_probe_delay(self):
+	def test_set_probe_delay(self):
 		PROBE_DELAY = 15;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1008,7 +1008,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_probe_delay != PROBE_DELAY,
 				"Failed to set probe delay: " + str(global_probe_delay))
 
-	def test_0047_get_regdomain(self):
+	def test_get_regdomain(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			n.dcal.wifi_global_pull()
@@ -1017,7 +1017,7 @@ class TestDCAL(unittest.TestCase):
 			n.dcal.wifi_global_close_handle()
 			n.dcal.close()
 
-	def test_0048_set_roam_period(self):
+	def test_set_roam_period(self):
 		ROAM_PERIOD_MS = 4000;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1037,7 +1037,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_roam_periodms != ROAM_PERIOD_MS,
 				"Failed to set roam period MS: " + str(global_roam_periodms))
 
-	def test_0049_set_roam_trigger(self):
+	def test_set_roam_trigger(self):
 		ROAM_TRIGGER = 65;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1057,7 +1057,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_roam_trigger != ROAM_TRIGGER,
 				"Failed to set roam trigger: " + str(global_roam_trigger))
 
-	def test_0050_set_rts(self):
+	def test_set_rts(self):
 		RTS = 2000;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1077,7 +1077,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_rts != RTS,
 				"Failed to set RTS: " + str(global_rts))
 
-	def test_0051_set_scan_dfs_time(self):
+	def test_set_scan_dfs_time(self):
 		DFS_TIME = 60;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1097,7 +1097,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_scan_dfs_time != DFS_TIME,
 				"Failed to set scan DFS time: " + str(global_scan_dfs_time))
 
-	def test_0052_set_ttls_inner_method(self):
+	def test_set_ttls_inner_method(self):
 		TTLS_INNER_METHOD = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1117,7 +1117,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_ttls_inner_method != TTLS_INNER_METHOD,
 				"Failed to set TTLS inner method: " + str(global_ttls_inner_method))
 
-	def test_0053_set_uapsd(self):
+	def test_set_uapsd(self):
 		UAPSD = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1137,7 +1137,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(global_uapsd != UAPSD,
 				"Failed to set UAPSD: " + str(global_uapsd))
 
-	def test_0054_set_wmm(self):
+	def test_set_wmm(self):
 		WMM = 1;
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1158,7 +1158,7 @@ class TestDCAL(unittest.TestCase):
 				"Failed to set WMM: " + str(global_uapsd))
 
 
-	def test_0055_set_ntpdate(self):
+	def test_set_ntpdate(self):
 		GOOD_FQDN = "pool.ntp.org";
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1167,7 +1167,7 @@ class TestDCAL(unittest.TestCase):
 			pprint.pprint(time_dict)
 			n.dcal.close()
 
-	def test_0056_set_time(self):
+	def test_set_time(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			time_dict_orig = n.dcal.time_get()
@@ -1183,7 +1183,7 @@ class TestDCAL(unittest.TestCase):
 			self.failIf(time_dict_orig['tv_usec'] >= time_dict_now['tv_usec'] >= time_dict_later['tv_usec'],
 				"Failed to set time, tv_usec out of bounds: " + str(time_dict_now['tv_usec']))
 
-	def test_0057_file_pull_from_wb(self):
+	def test_file_pull_from_wb(self):
 		PUSH_LOCAL_FILE = "test_file";
 		PUSH_REMOTE_FILE = None;
 		PULL_REMOTE_FILE = "/tmp/test_file";
@@ -1207,7 +1207,7 @@ class TestDCAL(unittest.TestCase):
 		os.remove(PUSH_LOCAL_FILE)
 		os.remove(PULL_LOCAL_FILE)
 
-	def test_0058_pull_logs(self):
+	def test_pull_logs(self):
 		DEST_FILE = "test_logs";
 		for n in wtfconfig.nodes:
 			n.dcal.open()
@@ -1219,7 +1219,7 @@ class TestDCAL(unittest.TestCase):
 
 		os.remove(DEST_FILE)
 
-	def test_0059_fw_update(self):
+	def test_fw_update(self):
 		FW_FILE = wtfconfig.fw_update_dir + "fw.txt";
 		AT91BS_FILE = wtfconfig.fw_update_dir + "at91bs.bin";
 		UBOOT_FILE = wtfconfig.fw_update_dir + "u-boot.bin";
@@ -1249,7 +1249,7 @@ class TestDCAL(unittest.TestCase):
 
 		os.remove(LOCAL_FILE)
 
-	def test_0060_process_cli_command_file(self):
+	def test_process_cli_command_file(self):
 		PUSH_CMD_FILE = "test_cmd_file";
 		PROFILENAME = "wtf_cli_process"
 		fo = open(PUSH_CMD_FILE, "w")
@@ -1271,7 +1271,7 @@ class TestDCAL(unittest.TestCase):
 
 		os.remove(PUSH_CMD_FILE)
 
-	def test_0061_scan_list(self):
+	def test_scan_list(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			scan_list = n.dcal.wifi_pull_scan_list()
@@ -1290,7 +1290,7 @@ class TestDCAL(unittest.TestCase):
 				pprint.pprint("BSS Type:" + str(scan_list_entry_type))
 			n.dcal.close()
 
-	def test_0062_profile_list(self):
+	def test_profile_list(self):
 		for n in wtfconfig.nodes:
 			n.dcal.open()
 			profile_list = n.dcal.wifi_pull_profile_list()
