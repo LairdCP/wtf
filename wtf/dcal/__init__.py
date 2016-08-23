@@ -617,7 +617,112 @@ class Dcal():
 		self.d.wifi_global_printf()
 
 	#######################################################################
+	# WiFi Scan
+	def wifi_pull_scan_list(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list = dcal_py.generic_int()
+		ret = self.d.wifi_pull_scan_list(scan_list)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_pull_scan_list: ", ret)
+		return scan_list.gen_int
+
+	def wifi_get_scan_list_entry_ssid(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list_SSID = dcal_py.profile_SSID()
+		ret = self.d.wifi_get_scan_list_entry_ssid( index, scan_list_SSID )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_scan_list_entry_ssid: ", ret)
+		scan_list_SSID_dict = {
+			'len': scan_list_SSID.len,
+			'val': scan_list_SSID.val(),
+		}
+		return scan_list_SSID_dict
+
+	def wifi_get_scan_list_entry_bssid(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list_BSSID = dcal_py.generic_string()
+		ret = self.d.wifi_get_scan_list_entry_bssid( index, scan_list_BSSID )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_scan_list_entry_bssid: ", ret)
+		return scan_list_BSSID.gen_string()
+
+	def wifi_get_scan_list_entry_channel(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list_channel = dcal_py.generic_int()
+		ret = self.d.wifi_get_scan_list_entry_channel( index, scan_list_channel )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_scan_list_entry_channel: ", ret)
+		return scan_list_channel.gen_int
+
+	def wifi_get_scan_list_entry_rssi(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list_rssi = dcal_py.generic_int()
+		ret = self.d.wifi_get_scan_list_entry_rssi( index, scan_list_rssi )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_scan_list_entry_rssi: ", ret)
+		return scan_list_rssi.gen_int
+
+	def wifi_get_scan_list_entry_securityMask(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list_securityMask = dcal_py.generic_int()
+		ret = self.d.wifi_get_scan_list_entry_securityMask( index, scan_list_securityMask )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_scan_list_entry_securityMask: ", ret)
+		return scan_list_securityMask.gen_int
+
+	def wifi_get_scan_list_entry_type(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		scan_list_entry_type = dcal_py.generic_int()
+		ret = self.d.wifi_get_scan_list_entry_type( index, scan_list_entry_type )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_scan_list_entry_type: ", ret)
+		return scan_list_entry_type.gen_int
+
+	#######################################################################
 	# WiFi Profile Management
+	def wifi_pull_profile_list(self):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		profile_list = dcal_py.generic_int()
+		ret = self.d.wifi_pull_profile_list(profile_list)
+		if ret != 0:
+			raise CommandError("Error when doing wifi_pull_profile_list: ", ret)
+		return profile_list.gen_int
+
+	def wifi_get_profile_list_entry_profilename(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		profile_list_profilename = dcal_py.generic_string()
+		ret = self.d.wifi_get_profile_list_entry_profilename( index, profile_list_profilename )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_profile_list_entry_profilename: ", ret)
+		return profile_list_profilename.gen_string()
+
+	def wifi_get_profile_list_entry_autoprofile(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		profile_list_autoprofile = dcal_py.generic_int()
+		ret = self.d.wifi_get_profile_list_entry_autoprofile( index, profile_list_autoprofile )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_profile_list_entry_autoprofile: ", ret)
+		return profile_list_autoprofile.gen_int
+
+	def wifi_get_profile_list_entry_active(self, index):
+		if not self.is_open:
+			raise SessionError("Error session is not open")
+		profile_list_entry_active = dcal_py.generic_int()
+		ret = self.d.wifi_get_profile_list_entry_active( index, profile_list_entry_active )
+		if ret != 0:
+			raise CommandError("Error when processing wifi_get_profile_list_entry_active: ", ret)
+		return profile_list_entry_active.gen_int
+
 	def wifi_profile_create(self):
 		if not self.is_open:
 			raise SessionError("Error session is not open")

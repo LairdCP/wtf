@@ -1270,3 +1270,35 @@ class TestDCAL(unittest.TestCase):
 				"Failed to set profile via cli command file: " + str(profile_profilename))
 
 		os.remove(PUSH_CMD_FILE)
+
+	def test_0061_scan_list(self):
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			scan_list = n.dcal.wifi_pull_scan_list()
+			for index in range(0,scan_list):
+				scan_list_SSID = n.dcal.wifi_get_scan_list_entry_ssid(index)
+				scan_list_BSSID = n.dcal.wifi_get_scan_list_entry_bssid(index)
+				scan_list_channel = n.dcal.wifi_get_scan_list_entry_channel(index)
+				scan_list_RSSI = n.dcal.wifi_get_scan_list_entry_rssi(index)
+				scan_list_securityMask = n.dcal.wifi_get_scan_list_entry_securityMask(index)
+				scan_list_entry_type = n.dcal.wifi_get_scan_list_entry_type(index)
+				pprint.pprint("SSID:" + str(scan_list_SSID['val']))
+				pprint.pprint("BSSID:" + str(scan_list_BSSID))
+				pprint.pprint("Channel:" + str(scan_list_channel))
+				pprint.pprint("RSSI:" + str(scan_list_RSSI))
+				pprint.pprint("Security Mask:" + str(scan_list_securityMask))
+				pprint.pprint("BSS Type:" + str(scan_list_entry_type))
+			n.dcal.close()
+
+	def test_0062_profile_list(self):
+		for n in wtfconfig.nodes:
+			n.dcal.open()
+			profile_list = n.dcal.wifi_pull_profile_list()
+			for index in range(0,profile_list):
+				profile_list_profilename = n.dcal.wifi_get_profile_list_entry_profilename(index)
+				profile_list_autoprofile = n.dcal.wifi_get_profile_list_entry_autoprofile(index)
+				profile_list_active = n.dcal.wifi_get_profile_list_entry_active(index)
+				pprint.pprint("Profile Name:" + str(profile_list_profilename))
+				pprint.pprint("Auto Profile:" + str(profile_list_autoprofile))
+				pprint.pprint("Active:" + str(profile_list_active))
+			n.dcal.close()
